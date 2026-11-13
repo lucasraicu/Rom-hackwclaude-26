@@ -1,0 +1,27 @@
+SCOPE OF WORK AND CONSULTING AGREEMENT
+Contract No. EYL-2026-C07
+
+Client: Eastbay Youth Literacy ("EYL")
+Consultant: Brightpath Consulting LLC
+Effective: October 1, 2026 through December 31, 2026
+Funding source: Federal Literacy Subaward FLS-2026-0412 (GRANT-FED)
+
+1. Purpose
+Brightpath Consulting will design the reading assessment framework for EYL's federal literacy program classrooms (grades 2-3). The work benefits only the federal literacy program. It does not cover EYL's after-school tutoring program, fundraising, or general operations.
+
+2. Deliverables
+2.1 A grade 2-3 reading assessment rubric aligned to the program's phonics curriculum, due October 31, 2026.
+2.2 Two teacher training sessions on administering the rubric in federal literacy program classrooms, delivered by November 20, 2026.
+2.3 A baseline assessment report for the program's fall cohort, due December 15, 2026.
+
+3. Compensation
+Fixed fee of $3,500.00 for October 2026 work on deliverable 2.1, invoiced as "Strategy services - October". Later deliverables are billed separately.
+
+4. Records
+Consultant will keep time and deliverable records and make them available to EYL and the federal pass-through entity on request.
+
+Signed:
+Dana Whitfield, Executive Director, Eastbay Youth Literacy, September 29, 2026
+Owen Park, Principal, Brightpath Consulting LLC, September 30, 2026
+
+(Fictional document created for the FundProof hackathon demo.)

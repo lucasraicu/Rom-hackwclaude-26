@@ -137,6 +137,14 @@ export interface AnalysisResult {
 export interface AnalyzeRequest {
   /** Text of an uploaded timesheets CSV that replaces data/inputs/timesheets.csv (the fix-loop moment). */
   timesheetsCsv?: string;
+  /** Extra evidence the user uploaded as text, e.g. a signed scope of work (demo scenario 3). */
+  supportingDocs?: SupportingDoc[];
+}
+
+/** A text document uploaded as evidence. Claude may use it; code never treats it as a verified grant quote. */
+export interface SupportingDoc {
+  file: string; // file name, e.g. "brightpath-scope-of-work.txt"
+  text: string;
 }
 
 /** POST /api/analyze response: AnalysisResult. GET /api/dataset response: Dataset. */

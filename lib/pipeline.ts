@@ -8,7 +8,7 @@ import { verifyCitation } from "./data/verifyCitations";
 import { summarize } from "./data/summarize";
 import { extractRulesForFund } from "./ai/extractRules";
 import { proposeAllocations, type Proposal } from "./ai/proposeAllocations";
-import { FUND_CODES, type Allocation, type Citation, type AnalysisResult, type Dataset, type FundCode, type GrantRule } from "./types";
+import { FUND_CODES, type Allocation, type Citation, type AnalysisResult, type Dataset, type FundCode, type GrantRule, type SupportingDoc } from "./types";
 
 const RULES_CACHE = path.join(process.cwd(), "data", "cache", "grant-rules.json");
 
@@ -127,10 +127,10 @@ function decide(item: Item, p: Proposal, ds: Dataset) {
   return { status, parts, reason, missingEvidence };
 }
 
-export async function runAnalysis(opts: { timesheetsCsv?: string } = {}): Promise<AnalysisResult> {
-  const ds = await loadDataset(opts);
+export async function runAnalysis(opts: { timesheetsCsv?: string; supportingDocs?: SupportingDoc[] } = {}): Promise<AnalysisResult> {
+  const ds = await loadDataset({ timesheetsCsv: opts.timesheetsCsv });
   const rules = await getRules(ds);
-  const proposals = await proposeAllocations(ds, rules);
+  const proposals = await proposeAllocations(ds, rules, opts.supportingDocs ?? []);
   return buildResult(ds, rules, proposals);
 }
 

@@ -160,5 +160,88 @@
         "UNRESTRICTED": 5760.0
       }
     }
+  },
+  "scopeOfWork": {
+    "T-001": {
+      "status": "supported",
+      "splits": {
+        "GRANT-FDN": 1240.0
+      }
+    },
+    "T-002": {
+      "status": "supported",
+      "splits": {
+        "GRANT-FED": 875.0
+      }
+    },
+    "T-003": {
+      "status": "supported",
+      "splits": {
+        "GRANT-FED": 3500.0
+      }
+    },
+    "T-004": {
+      "status": "not_allowable",
+      "splits": {
+        "UNRESTRICTED": 412.5
+      }
+    },
+    "T-005": {
+      "status": "supported",
+      "splits": {
+        "GRANT-FDN": 286.3
+      }
+    },
+    "T-006": {
+      "status": "supported",
+      "splits": {
+        "UNRESTRICTED": 186.4
+      }
+    },
+    "T-007": {
+      "status": "supported",
+      "splits": {
+        "UNRESTRICTED": 342.18
+      }
+    },
+    "T-008": {
+      "status": "not_allowable",
+      "splits": {
+        "UNRESTRICTED": 2000.0
+      }
+    },
+    "T-009": {
+      "status": "supported",
+      "splits": {
+        "GRANT-FED": 640.0
+      }
+    },
+    "T-010": {
+      "status": "supported",
+      "splits": {
+        "UNRESTRICTED": 149.9
+      }
+    },
+    "PAY-E-01": {
+      "status": "supported",
+      "splits": {
+        "GRANT-FED": 4464.0,
+        "GRANT-FDN": 1488.0,
+        "UNRESTRICTED": 1488.0
+      }
+    },
+    "PAY-E-02": {
+      "status": "supported",
+      "splits": {
+        "GRANT-FDN": 2952.0,
+        "GRANT-FED": 1968.0
+      }
+    },
+    "PAY-E-03": {
+      "status": "supported",
+      "splits": {
+        "UNRESTRICTED": 5760.0
+      }
+    }
   }
 }

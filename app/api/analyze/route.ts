@@ -1,6 +1,6 @@
 // AI lane. POST /api/analyze  body: AnalyzeRequest  ->  AnalysisResult
 // FUNDPROOF_MOCK=1 returns fixtures so the UI never waits on Claude.
-// FUNDPROOF_MOCK=cache returns the last known-good live run saved in data/cache (falls back to fixtures).
+// FUNDPROOF_MOCK=cache returns the recorded Claude run for this input from data/cache (initial and after-fix fall back to fixtures).
 import fs from "node:fs/promises";
 import path from "node:path";
 import Anthropic from "@anthropic-ai/sdk";
@@ -15,14 +15,23 @@ export const maxDuration = 300;
 
 const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function fromCache(fixed: boolean): Promise<AnalysisResult> {
-  const file = path.join(process.cwd(), "data", "cache", fixed ? "analysis.after-fix.json" : "analysis.initial.json");
+type Scenario = "initial" | "after-fix" | "scope-of-work";
+
+/** Each demo input maps to one recorded run (scripts/replay-claude-runs.ts writes them). */
+function scenarioFor(body: AnalyzeRequest): Scenario {
+  if (body.supportingDocs?.length) return "scope-of-work";
+  return body.timesheetsCsv ? "after-fix" : "initial";
+}
+
+async function fromCache(scenario: Scenario): Promise<AnalysisResult> {
+  const file = path.join(process.cwd(), "data", "cache", `analysis.${scenario}.json`);
   try {
     const saved = JSON.parse(await fs.readFile(file, "utf8")) as AnalysisResult;
     return { ...saved, mode: "cache" };
   } catch {
+    if (scenario === "scope-of-work") throw new Error(`No recorded run in data/cache/${path.basename(file)}. Run npx tsx scripts/replay-claude-runs.ts.`);
     console.warn(`[fundproof] ${path.basename(file)} not found in data/cache; serving the mock fixture instead`);
-    return (fixed ? afterFix : initial) as AnalysisResult;
+    return (scenario === "after-fix" ? afterFix : initial) as AnalysisResult;
   }
 }
 
@@ -32,7 +41,12 @@ export async function POST(req: Request) {
   const mode = process.env.FUNDPROOF_MOCK;
   if (mode === "1" || mode === "cache") {
     await pause(1200); // feels like real work in the UI
-    return NextResponse.json(mode === "cache" ? await fromCache(fixed) : ((fixed ? afterFix : initial) as AnalysisResult));
+    if (mode === "1") return NextResponse.json((fixed ? afterFix : initial) as AnalysisResult);
+    try {
+      return NextResponse.json(await fromCache(scenarioFor(body)));
+    } catch (err) {
+      return NextResponse.json({ error: err instanceof Error ? err.message : String(err) }, { status: 503 });
+    }
   }
   if (!process.env.ANTHROPIC_API_KEY && !process.env.ANTHROPIC_AUTH_TOKEN) {
     return NextResponse.json(
@@ -42,7 +56,7 @@ export async function POST(req: Request) {
   }
   try {
     const started = Date.now();
-    const result = await runAnalysis({ timesheetsCsv: body.timesheetsCsv });
+    const result = await runAnalysis({ timesheetsCsv: body.timesheetsCsv, supportingDocs: body.supportingDocs });
     console.log(`[fundproof] live analysis (${fixed ? "after fix" : "initial"}) took ${((Date.now() - started) / 1000).toFixed(1)}s`);
     return NextResponse.json(result);
   } catch (err) {

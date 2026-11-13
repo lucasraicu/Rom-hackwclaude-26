@@ -6,7 +6,7 @@ import { callStructured, pdfBlock } from "./claude";
 import { INPUTS_DIR } from "../data/loadDataset";
 import type { Fund, GrantRule } from "../types";
 
-const RuleSchema = z.object({
+export const RuleSchema = z.object({
   rules: z.array(
     z.object({
       kind: z.enum(["allowed", "disallowed", "documentation", "allocation"]),
@@ -17,7 +17,7 @@ const RuleSchema = z.object({
   ),
 });
 
-const SYSTEM = `You read grant agreements for a small nonprofit's finance team.
+export const RULES_SYSTEM = `You read grant agreements for a small nonprofit's finance team.
 Extract every rule that decides whether a cost can be charged to this grant:
 what is allowed, what is not allowed, what documentation is required, and how shared costs must be allocated.
 Make one rule per numbered clause; do not merge clauses or skip any that bear on charging costs.
@@ -29,10 +29,17 @@ export async function extractRulesForFund(fund: Fund): Promise<GrantRule[]> {
   if (!fund.sourceDoc) return [];
   const b64 = (await fs.readFile(path.join(INPUTS_DIR, fund.sourceDoc))).toString("base64");
   const out = await callStructured({
-    system: SYSTEM,
+    system: RULES_SYSTEM,
     schema: RuleSchema,
-    content: [pdfBlock(b64, fund.sourceDoc), { type: "text", text: `This is the agreement for fund ${fund.code} (${fund.name}). Extract its rules.` }],
+    content: [pdfBlock(b64, fund.sourceDoc), { type: "text", text: rulesUserText(fund) }],
   });
+  return toGrantRules(fund, out);
+}
+
+export const rulesUserText = (fund: Fund) => `This is the agreement for fund ${fund.code} (${fund.name}). Extract its rules.`;
+
+/** Turns Claude's rule list into GrantRules with stable ids. Quotes stay unverified until code checks them. */
+export function toGrantRules(fund: Fund, out: z.infer<typeof RuleSchema>): GrantRule[] {
   const prefix = fund.code === "GRANT-FED" ? "FED" : "FDN";
   return out.rules.map((r, i) => ({
     id: `${prefix}-R${i + 1}`,
