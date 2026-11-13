@@ -182,4 +182,9 @@ test("offline CLI succeeds without API calls and refuses to save fixtures as liv
   const invalid = run("--fixtures", "--save-cache");
   assert.equal(invalid.status, 1);
   assert.match(invalid.stderr, /Only live evaluation/);
+  const defaultMock = spawnSync(process.execPath, ["--import", "tsx", "scripts/eval.ts"], {
+    encoding: "utf8", env: { ...process.env, FUNDPROOF_MOCK: "1", ANTHROPIC_API_KEY: "" },
+  });
+  assert.equal(defaultMock.status, 0, defaultMock.stdout + defaultMock.stderr);
+  assert.match(defaultMock.stdout, /Evaluation source: fixtures \(no API calls\)/);
 });

@@ -1,4 +1,4 @@
-// DATA lane. Default: live Claude calls. Offline: npx tsx scripts/eval.ts --fixtures
+// DATA lane. Honors FUNDPROOF_MOCK by default. Explicit --live makes Claude calls.
 // --cache checks saved live fallbacks; --save-cache saves both scenarios only if both pass.
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -9,13 +9,14 @@ import type { AnalysisResult } from "../lib/types";
 
 async function main() {
   const args = new Set(process.argv.slice(2));
-  for (const arg of args) if (!["--fixtures", "--cache", "--save-cache"].includes(arg)) throw new Error(`Unknown argument: ${arg}`);
-  if (args.has("--fixtures") && args.has("--cache")) throw new Error("Choose either --fixtures or --cache.");
-  const mode = args.has("--fixtures") ? "fixtures" : args.has("--cache") ? "cache" : "live";
-  if (args.has("--save-cache") && mode !== "live") throw new Error("Only live evaluation may save demo caches.");
+  for (const arg of args) if (!["--fixtures", "--cache", "--live", "--save-cache"].includes(arg)) throw new Error(`Unknown argument: ${arg}`);
+  if (["--fixtures", "--cache", "--live"].filter((arg) => args.has(arg)).length > 1) throw new Error("Choose only one evaluation source: --fixtures, --cache, or --live.");
   try { loadEnvFile(".env.local"); } catch (error) {
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
+  const mode = args.has("--fixtures") ? "fixtures" : args.has("--cache") ? "cache" : args.has("--live") ? "live"
+    : process.env.FUNDPROOF_MOCK === "1" ? "fixtures" : process.env.FUNDPROOF_MOCK === "cache" ? "cache" : "live";
+  if (args.has("--save-cache") && mode !== "live") throw new Error("Only live evaluation may save demo caches. Use --live --save-cache when live API calls are intended.");
   if (mode === "live" && !process.env.ANTHROPIC_API_KEY?.trim()) throw new Error("Live evaluation needs ANTHROPIC_API_KEY. Configure it locally, or use: npx tsx scripts/eval.ts --fixtures");
   const expected: { initial: ExpectedItems; afterFix: ExpectedItems } = JSON.parse(await fs.readFile("data/expected.json", "utf8"));
   const corrected = await fs.readFile("data/inputs/timesheets-corrected.csv", "utf8");
