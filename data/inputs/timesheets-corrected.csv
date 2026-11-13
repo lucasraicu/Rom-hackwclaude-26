@@ -1,0 +1,7 @@
+employee_id,period,activity,fund_code,hours
+E-01,2026-10,Federal literacy program delivery and supervision,GRANT-FED,96
+E-01,2026-10,After-school tutoring program oversight,GRANT-FDN,32
+E-01,2026-10,Board prep and general administration,UNRESTRICTED,32
+E-02,2026-10,Tutoring site supervision,GRANT-FDN,96
+E-02,2026-10,Federal program reporting,GRANT-FED,64
+E-03,2026-10,Finance and operations,UNRESTRICTED,160

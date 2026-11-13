@@ -1,0 +1,4 @@
+employee_id,name,title,period,gross_pay,benefits,planned_allocation,job_description
+E-01,Maria Lopez,Program Director,2026-10,6200.00,1240.00,GRANT-FED 50% / GRANT-FDN 30% / UNRESTRICTED 20%,"Directs both the federal literacy program and the after-school tutoring program; also handles board reporting."
+E-02,James Chen,Tutor Coordinator,2026-10,4100.00,820.00,GRANT-FDN 60% / GRANT-FED 40%,"Schedules and supervises tutors at three after-school sites; supports federal program reporting."
+E-03,Priya Shah,Operations Manager,2026-10,4800.00,960.00,UNRESTRICTED 100%,"Runs finance, HR and facilities for the organization."

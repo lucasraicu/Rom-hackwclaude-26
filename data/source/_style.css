@@ -1,0 +1,6 @@
+body { font-family: Helvetica, Arial, sans-serif; font-size: 11pt; line-height: 1.45; margin: 0.9in; color: #111; }
+h1 { font-size: 16pt; margin: 0 0 4pt; } h2 { font-size: 12pt; margin: 18pt 0 6pt; }
+.meta { color: #444; font-size: 10pt; margin-bottom: 16pt; }
+table { border-collapse: collapse; width: 100%; font-size: 10pt; } td, th { border: 1px solid #999; padding: 4pt 6pt; text-align: left; }
+.page { page-break-after: always; } .page:last-child { page-break-after: auto; }
+.note { font-size: 9pt; color: #666; margin-top: 24pt; }
