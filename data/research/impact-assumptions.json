@@ -1,0 +1,102 @@
+{
+  "title": "FundProof industry context and illustrative impact model",
+  "providedBy": "Lucas, via project conversation",
+  "recordedAt": "2026-11-13",
+  "sourceVerification": "User-provided research; original publications and wage periods have not been independently checked in this session.",
+  "contactEvidence": {
+    "monthlyAllocationHours": null,
+    "approvedQuote": null,
+    "status": "unconfirmed; industry survey results are not a substitute for this contact's experience"
+  },
+  "sources": [
+    {
+      "id": "community-brands-2024",
+      "url": "https://www.givesmart.com/wp-content/uploads/2024/05/Q2_Q3_2024_MIP_GS_Nonprofit-Research-Study_VERSION-4.pdf",
+      "reportedYear": 2024,
+      "reportedSampleSize": 1000,
+      "claims": [
+        { "metric": "manual_data_manipulation_hours_per_week", "value": 9.8 },
+        { "metric": "manual_process_hours_per_week", "value": 9.3 },
+        { "metric": "estimated_annual_manual_data_labor_cost_per_employee_usd", "value": 30147 }
+      ],
+      "limitations": ["Broad nonprofit work, not grant allocation alone.", "The two time measures may overlap and must not be added.", "The labor-cost estimate is not a FundProof savings estimate."]
+    },
+    {
+      "id": "climateworks-2024",
+      "url": "https://www.climateworks.org/blog/listening-to-lead-insights-from-climateworks-2024-grantee-perception-report/",
+      "reportedYear": 2024,
+      "claims": [
+        { "metric": "sector_application_and_reporting_hours_per_grant_cycle", "value": 48 },
+        { "metric": "climateworks_application_and_reporting_hours_per_grant_cycle_approximately", "value": 50 }
+      ],
+      "limitations": ["Per grant cycle, not per week.", "Includes work beyond the financial-document workflows FundProof targets."]
+    },
+    {
+      "id": "accufund-2015",
+      "url": "https://www.prnewswire.com/news-releases/accufund-inc-releases-2015-2016-nonprofit-accounting-insights--analysis-survey-results-300171044.html",
+      "reportedYear": 2015,
+      "reportedSampleSizeApproximately": 300,
+      "claims": [
+        { "metric": "respondents_over_six_weekly_hours_manipulating_data_outside_financial_systems_percent", "value": 27 },
+        { "metric": "respondents_five_or_fewer_weekly_hours_percent_approximately", "value": 73 },
+        { "metric": "respondents_with_fewer_than_five_accounting_staff_percent_approximately", "value": 95 }
+      ],
+      "limitations": ["Historical survey; do not describe as current or representative of every US nonprofit.", "Retain the original survey's response-bin wording when checking the primary publication."]
+    },
+    {
+      "id": "givesmart-trends-2024",
+      "url": "https://www.givesmart.com/2024-nonprofit-trends-report/",
+      "reportedYear": 2024,
+      "claims": [{ "metric": "respondents_seeking_better_multiple_grant_and_funding_tools_percent", "value": 63 }],
+      "limitations": ["Does not directly establish demand for FundProof."]
+    },
+    {
+      "id": "bls-bookkeeping",
+      "url": "https://www.bls.gov/ooh/office-and-administrative-support/bookkeeping-accounting-and-auditing-clerks.htm",
+      "reportedPeriod": "May 2025; verify the publication's wage period before quoting",
+      "claims": [
+        { "metric": "median_hourly_wage_usd", "value": 24.36 },
+        { "metric": "median_annual_wage_usd", "value": 50670 }
+      ],
+      "limitations": ["US occupation-wide wages, not an observed salary at the nonprofit contact."]
+    },
+    {
+      "id": "bls-accountants",
+      "url": "https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm",
+      "reportedPeriod": "May 2025; verify the publication's wage period before quoting",
+      "claims": [
+        { "metric": "median_annual_wage_usd", "value": 83680 },
+        { "metric": "derived_hourly_equivalent_usd_approximately", "value": 40.23 }
+      ],
+      "limitations": ["Hourly equivalent is derived using 2080 hours per year."]
+    },
+    {
+      "id": "bls-employer-compensation",
+      "url": "https://www.bls.gov/news.release/ecec.toc.htm",
+      "claims": [],
+      "limitations": ["Benefits vary by sector and period. The 30% benefits share used below is illustrative, not a verified nonprofit-specific estimate."]
+    }
+  ],
+  "model": {
+    "status": "hypothetical; no FundProof customer time savings have been measured",
+    "baselineHoursPerWeek": 6,
+    "loadedHourlyCostUsd": 35,
+    "weeksPerYear": 52,
+    "loadedCostRationale": "Illustrative $24.36 hourly wage divided by 0.70 wage share is approximately $34.80; rounded to $35. The 30% benefits share is an assumption.",
+    "formula": "baselineHoursPerWeek * efficiencyImprovement * weeksPerYear * loadedHourlyCostUsd",
+    "scenarios": [
+      { "name": "conservative", "efficiencyImprovement": 0.25, "weeklyHoursSaved": 1.5, "annualHoursSaved": 78, "annualStaffTimeValueUsd": 2730 },
+      { "name": "moderate", "efficiencyImprovement": 0.5, "weeklyHoursSaved": 3, "annualHoursSaved": 156, "annualStaffTimeValueUsd": 5460 },
+      { "name": "optimistic", "efficiencyImprovement": 0.75, "weeklyHoursSaved": 4.5, "annualHoursSaved": 234, "annualStaffTimeValueUsd": 8190 }
+    ],
+    "exclusions": ["software price", "setup", "supervision", "additional human review"],
+    "interpretation": "Potential value of staff time available for other work; not measured savings, guaranteed cash savings, or net ROI."
+  },
+  "validationNextSteps": [
+    "Confirm the original publications, page or table locators, populations and wage periods before calling the claims independently verified.",
+    "Interview nonprofit finance staff and obtain permission for any attributed quote.",
+    "Time a representative manual grant, transaction and payroll review.",
+    "Repeat the same workflow with FundProof and human review.",
+    "Compare net time, corrections, accuracy and documentation completeness, including reviewer effort."
+  ]
+}

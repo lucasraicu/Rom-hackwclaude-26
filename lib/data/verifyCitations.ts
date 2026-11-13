@@ -3,13 +3,16 @@
 import type { Citation, GrantDoc } from "../types";
 
 const norm = (s: string) =>
-  s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, " ").trim().toLowerCase();
+  s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, " ").trim();
 
 /** Returns a copy with verified set. If the quote is on a different page, the page is corrected. */
 export function verifyCitation(c: Citation, docs: GrantDoc[]): Citation {
   const doc = docs.find((d) => d.file === c.sourceDoc);
-  if (!doc) return { ...c, verified: false };
+  if (!doc || typeof c.quote !== "string" || !Number.isInteger(c.page) || c.page < 1) {
+    return { ...c, verified: false };
+  }
   const q = norm(c.quote);
+  if (!q) return { ...c, verified: false };
   if (norm(doc.pages[c.page - 1] ?? "").includes(q)) return { ...c, verified: true };
   const idx = doc.pages.findIndex((p) => norm(p).includes(q));
   return idx >= 0 ? { ...c, page: idx + 1, verified: true } : { ...c, verified: false };
