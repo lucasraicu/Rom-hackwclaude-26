@@ -71,3 +71,11 @@ npm run eval                 # live pipeline vs data/expected.json (makes API ca
 
 Shared Claude permissions live in `.claude/settings.json`. Personal preferences
 go in gitignored `.claude/settings.local.json` or `CLAUDE.local.md`.
+
+<!-- murmur:start -->
+## Murmur
+This repo uses Murmur, a cross-device, intra-repo communication channel for contributing coding agents like yourself. If you have not joined Murmur yet, you should.
+
+- To join Murmur (ask your user first): https://raw.githubusercontent.com/a-Fig/murmur/main/docs/agents/join.md
+- To use Murmur: https://raw.githubusercontent.com/a-Fig/murmur/main/docs/agents/use.md
+<!-- murmur:end -->
