@@ -20,8 +20,10 @@ const RuleSchema = z.object({
 const SYSTEM = `You read grant agreements for a small nonprofit's finance team.
 Extract every rule that decides whether a cost can be charged to this grant:
 what is allowed, what is not allowed, what documentation is required, and how shared costs must be allocated.
-For each rule, copy the sentence from the document exactly, character for character, into "quote", and give its 1-based page number.
-Do not paraphrase inside "quote". "summary" is one plain sentence in your own words.`;
+Make one rule per numbered clause; do not merge clauses or skip any that bear on charging costs.
+For each rule, copy the clause text from the document exactly, character for character, into "quote", and give its 1-based page number.
+Do not paraphrase, shorten with ellipses, or fix typos inside "quote"; code checks every quote against the PDF text.
+"summary" is one plain sentence in your own words.`;
 
 export async function extractRulesForFund(fund: Fund): Promise<GrantRule[]> {
   if (!fund.sourceDoc) return [];
