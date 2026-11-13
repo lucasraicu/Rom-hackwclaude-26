@@ -37,6 +37,23 @@ async function getRules(ds: Dataset): Promise<GrantRule[]> {
   }
 }
 
+const normReg = (s: string) => s.replace(/§\s*/g, "").replace(/\s+/g, " ").trim();
+
+/**
+ * Regulation references are shown next to verified quotes, so they get the same treatment:
+ * keep one only if an item cites a federal grant rule and the federal agreement's text names it.
+ * Never a federal regulation on a foundation-only or unrestricted decision.
+ */
+function checkedRegulations(refs: string[], ruleIds: string[], rules: GrantRule[], ds: Dataset): string[] {
+  const fedCited = rules.some((r) => ruleIds.includes(r.id) && ds.funds.find((f) => f.code === r.fund)?.type === "federal");
+  if (!fedCited) return [];
+  const fedText = ds.grantDocs
+    .filter((d) => ds.funds.find((f) => f.code === d.fund)?.type === "federal")
+    .map((d) => normReg(d.pages.join(" ")))
+    .join(" ");
+  return [...new Set(refs.map(normReg))].filter((r) => r && fedText.includes(r));
+}
+
 type Item = {
   itemId: string;
   itemType: "transaction" | "payroll";
@@ -164,7 +181,8 @@ export function buildResult(ds: Dataset, rules: GrantRule[], proposals: Proposal
       .map((id) => rules.find((r) => r.id === id)?.citation)
       .filter((c): c is NonNullable<typeof c> => !!c)
       .map((c) => safeVerify(c, ds));
-    const regulations = p.regulations.length ? { regulations: p.regulations } : {};
+    const regs = checkedRegulations(p.regulations, p.ruleIds, rules, ds);
+    const regulations = regs.length ? { regulations: regs } : {};
     try {
       // The DATA helpers throw on invalid inputs (bad percents, mixed periods...). Fail closed for this item only.
       const d = decide(item, p, ds);
