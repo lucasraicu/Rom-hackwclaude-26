@@ -1,6 +1,6 @@
 ---
 name: Task
-about: Define a small task for one developer and one branch.
+about: Define a small task for one developer on shared main.
 title: ""
 labels: ""
 assignees: ""
@@ -10,9 +10,9 @@ assignees: ""
 
 <!-- Describe the observable result. Assign one human owner in Assignees. -->
 
-## Branch and files
+## Files and ownership
 
-Branch: <!-- developer/issue-number-short-description; fill after creation. -->
+Shared branch: `main`
 Files or areas: <!-- Coordinate overlap with the teammate before coding. -->
 
 ## Acceptance criteria
@@ -25,4 +25,4 @@ Files or areas: <!-- Coordinate overlap with the teammate before coding. -->
 
 ## Progress and handoff
 
-<!-- Add comments with decisions, blockers, checks, remaining work, and PR link. -->
+<!-- Add comments with decisions, blockers, checks, remaining work, and commit link. -->

@@ -28,7 +28,7 @@ The stack is not chosen. Do not scaffold a full app unless asked.
 - Check the issue's assignee and recent comments, and inspect `git status`,
   the current branch, and existing diffs. Preserve unrelated local changes.
 - Claim an unassigned issue with your own GitHub account before coding.
-  Record your branch, intended files, acceptance criteria, and dependencies
+  Record your intended files, acceptance criteria, and dependencies
   in the issue. Recheck ownership before editing; coordinate any overlap.
 - If GitHub is unavailable, have both developers explicitly agree on ownership
   in a shared conversation before coding. A local `TASKS.md` edit is not a claim.
@@ -37,9 +37,13 @@ The stack is not chosen. Do not scaffold a full app unless asked.
 
 - Multiple people may use independent Claude Code sessions simultaneously.
   Do not assume the other session knows your conversation or unpushed changes.
-- Use one branch per task: `<developer>/<issue-number>-<short-description>`.
-  Each active session needs its own clone or worktree. Never switch branches
-  underneath another session in the same working directory.
+- Work in the same repository on the shared `main` branch, with a separate
+  GitHub issue and owner for each task. Sessions on one computer may share the
+  checkout. Never switch branches underneath another session.
+- Assign separate files to concurrent tasks. If tasks need the same file, agree
+  on an editing order before changing it; never edit the same lines concurrently.
+- Coordinate all staging, commits, pulls, and pushes: only one session performs
+  Git write operations at a time. The index is shared across the checkout.
 - Do not edit files owned by the other developer without coordinating first.
   Agree on shared interfaces before implementing dependent components.
 - Coordinate edits to shared configuration, dependency manifests and lockfiles,
@@ -51,21 +55,26 @@ The stack is not chosen. Do not scaffold a full app unless asked.
 ## Integration
 
 - Keep commits focused and descriptive. Stage only intended files.
-- Fetch and merge `origin/main` into your task branch before final verification
-  when it has advanced; do not rewrite published history.
+- Before syncing, coordinate with the teammate and check the entire checkout.
+  Pull with `git pull --ff-only origin main` only when the working tree and index
+  are clean. If histories diverge, coordinate a merge; do not rewrite history.
 - Resolve conflicts by preserving both developers' intended behavior. Coordinate
   uncertain resolutions with the affected developer and rerun relevant checks.
 - Run checks appropriate to the change; report actual results and any blockers.
   No application build or tests exist yet. Add real commands here once chosen.
-- Open a pull request to `main`, link its issue, and describe validation and
-  remaining work. Ask the teammate to review before merging.
-- Keep `main` working and demo-ready. Record handoff context in the issue or PR:
+- Have the teammate review the task diff and checks before a requested push
+  to shared `main`. Record the resulting commit in the task issue.
+- Keep `main` working and demo-ready. Record handoff context in the issue:
   what changed, checks run, dependencies, and what remains.
 
 ## Git
 
-- Commit, push your task branch, or open a PR only when the developer requests
-  it. Never push directly to `main`; merge or deploy only on explicit request.
+- Commit or push shared `main` only when the developer requests it. Merge or
+  deploy only on explicit request. Task branches and PRs are optional if requested.
+- Stage only the task's agreed files or hunks, inspect `git diff --cached`, and
+  confirm it contains no other task's changes before committing. Never use
+  `git add .` or `git commit -a` in the shared checkout.
+- Never stash, restore, or clean another session's work to make syncing possible.
 - Never force-push or hard-reset.
 - Never commit secrets or local `.env` files. When configuration is introduced,
   use a tracked `.env.example` containing placeholders only.

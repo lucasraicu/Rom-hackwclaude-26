@@ -15,7 +15,7 @@ Issue: <!-- Use Closes #123 only if this PR completes the issue. -->
 
 ## Checklist
 
-- [ ] The issue records the owner, branch, scope, and acceptance criteria.
+- [ ] The issue records the owner, scope, and acceptance criteria.
 - [ ] Changes stay within the agreed scope; overlapping edits were coordinated.
 - [ ] Relevant checks passed, or limitations are explained above.
 - [ ] No secrets or local configuration are included.
