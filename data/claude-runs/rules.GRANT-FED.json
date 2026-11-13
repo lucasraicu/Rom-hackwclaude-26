@@ -1,0 +1,76 @@
+{
+  "rules": [
+    {
+      "kind": "allowed",
+      "summary": "Salaries and fringe benefits can be charged only for staff time spent teaching or directly supervising Program instruction.",
+      "page": 1,
+      "quote": "Salaries and fringe benefits are allowable for staff time spent delivering or directly supervising Program instruction."
+    },
+    {
+      "kind": "allowed",
+      "summary": "Books, instructional materials, and software licenses used in Program classrooms are allowable.",
+      "page": 1,
+      "quote": "Instructional materials, books, and software licenses used in Program classrooms are allowable."
+    },
+    {
+      "kind": "disallowed",
+      "summary": "Alcohol cannot be charged to the subaward.",
+      "page": 1,
+      "quote": "Costs of alcoholic beverages are unallowable under 2 CFR 200.423."
+    },
+    {
+      "kind": "disallowed",
+      "summary": "Entertainment, including social activities and staff celebrations, cannot be charged to the subaward.",
+      "page": 1,
+      "quote": "Entertainment costs, including social activities and staff celebrations, are unallowable under 2 CFR 200.438."
+    },
+    {
+      "kind": "disallowed",
+      "summary": "Fundraising costs cannot be charged to the subaward.",
+      "page": 1,
+      "quote": "Costs of fundraising are unallowable under 2 CFR 200.442."
+    },
+    {
+      "kind": "disallowed",
+      "summary": "Costs of the organization's other programs, such as after-school tutoring, cannot be charged to this subaward.",
+      "page": 1,
+      "quote": "Costs of the Subrecipient's other programs, including its after-school tutoring program, may not be charged to this subaward."
+    },
+    {
+      "kind": "disallowed",
+      "summary": "General operating costs like rent, utilities, and office supplies cannot be charged directly to the subaward.",
+      "page": 1,
+      "quote": "General operating costs such as rent, utilities, and office supplies may not be charged directly to this subaward."
+    },
+    {
+      "kind": "documentation",
+      "summary": "Personnel charges must be backed by records of the work actually performed.",
+      "page": 2,
+      "quote": "Charges for personnel must be based on records that accurately reflect the work performed, as required by 2 CFR 200.430(i)."
+    },
+    {
+      "kind": "documentation",
+      "summary": "A budget estimate by itself is not enough to support a charge to the subaward.",
+      "page": 2,
+      "quote": "Budget estimates alone do not qualify as support for charges to this subaward."
+    },
+    {
+      "kind": "documentation",
+      "summary": "Contracted services need a written agreement describing deliverables that benefit the Program.",
+      "page": 2,
+      "quote": "Contracted services must be supported by a written agreement that describes deliverables benefiting the Program."
+    },
+    {
+      "kind": "allocation",
+      "summary": "A cost shared with other activities must be split in proportion to the benefit each one receives.",
+      "page": 2,
+      "quote": "Costs that benefit both this subaward and other activities must be allocated in proportion to the benefits received, consistent with 2 CFR 200.405."
+    },
+    {
+      "kind": "allocation",
+      "summary": "Costs cannot be moved onto this subaward to cover shortfalls on other awards.",
+      "page": 2,
+      "quote": "Costs may not be shifted to this subaward to overcome funding shortfalls on other awards."
+    }
+  ]
+}

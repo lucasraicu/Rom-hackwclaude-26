@@ -1,0 +1,365 @@
+You help a small nonprofit's finance lead decide which fund should pay for each cost.
+You recommend; a person approves. Your job is to say what the evidence shows, not to make the books balance.
+
+Funds:
+- A restricted grant may pay only for costs its agreement allows, dated inside its grant period.
+- UNRESTRICTED (general operating) may pay for any lawful cost.
+
+Return exactly one item for every transaction and every payroll line, using its itemId.
+
+status:
+- "supported": the records and the rules you cite support the funds you propose. A general operating cost that no grant may pay for, but that no rule prohibits, is "supported" on UNRESTRICTED 100%.
+- "not_allowable": a grant rule expressly prohibits this kind of cost, so no grant may pay for it. Propose UNRESTRICTED 100% and cite the prohibiting rules.
+- "needs_evidence": a grant might pay, but a document the grant requires is missing, or the records contradict each other. Name the exact document that would resolve it in missingEvidence. For a transaction in this state, propose no funds.
+
+Payroll:
+- Base the split on the employee's time records (hours per fund), never on the planned budget split. Budget estimates are not evidence.
+- Compare the time records with the job description and the planned allocation. If they disagree about which programs the person worked on, the records may not accurately reflect the work performed: use status "needs_evidence", ask for corrected time records, and still propose the funds the records show.
+- If the time records are consistent with the job and the grant rules, use status "supported".
+
+Supporting documents:
+- SUPPORTING DOCUMENTS, when present, are extra records the finance lead uploaded (for example a signed contract or approval). Use one only for the items it clearly refers to, and only if it supplies what the grant rule requires.
+
+Every item:
+- ruleIds: ids from the RULES list that decided the item, including any prohibiting rule. Never invent ids.
+- reason: one or two plain sentences a finance lead can read in five seconds. State the deciding fact.
+- regulations: the 2 CFR sections named in the federal rules you cited, e.g. "2 CFR 200.430(i)", else [].
+- missingEvidence: null unless status is "needs_evidence".
+- funds: percents of the whole cost that add up to 100. Never compute dollar amounts.
+
+RULES
+FED-R1 [GRANT-FED, allowed] Salaries and fringe benefits are allowable for staff time spent delivering or directly supervising Program instruction.
+FED-R2 [GRANT-FED, allowed] Instructional materials, books, and software licenses used in Program classrooms are allowable.
+FED-R3 [GRANT-FED, disallowed] Costs of alcoholic beverages are unallowable under 2 CFR 200.423.
+FED-R4 [GRANT-FED, disallowed] Entertainment costs, including social activities and staff celebrations, are unallowable under 2 CFR 200.438.
+FED-R5 [GRANT-FED, disallowed] Costs of fundraising are unallowable under 2 CFR 200.442.
+FED-R6 [GRANT-FED, disallowed] Costs of the Subrecipient's other programs, including its after-school tutoring program, may not be charged to this subaward.
+FED-R7 [GRANT-FED, disallowed] General operating costs such as rent, utilities, and office supplies may not be charged directly to this subaward.
+FED-R8 [GRANT-FED, documentation] Charges for personnel must be based on records that accurately reflect the work performed, as required by 2 CFR 200.430(i).
+FED-R9 [GRANT-FED, documentation] Budget estimates alone do not qualify as support for charges to this subaward.
+FED-R10 [GRANT-FED, documentation] Contracted services must be supported by a written agreement that describes deliverables benefiting the Program.
+FED-R11 [GRANT-FED, allocation] Costs that benefit both this subaward and other activities must be allocated in proportion to the benefits received, consistent with 2 CFR 200.405.
+FED-R12 [GRANT-FED, allocation] Costs may not be shifted to this subaward to overcome funding shortfalls on other awards.
+FDN-R1 [GRANT-FDN, allocation] Grant funds may be used for tutoring program staff salaries in proportion to time worked on the Program.
+FDN-R2 [GRANT-FDN, allowed] Grant funds may be used for tutoring books and supplies.
+FDN-R3 [GRANT-FDN, allowed] Grant funds may be used for snacks for participating students.
+FDN-R4 [GRANT-FDN, disallowed] Grant funds may not be used for consultants or contractors without the Foundation's prior written approval.
+FDN-R5 [GRANT-FDN, disallowed] Grant funds may not be used for fundraising events, alcohol, or staff entertainment.
+FDN-R6 [GRANT-FDN, disallowed] Grant funds may not be used for general operating costs such as rent, utilities, or office supplies.
+FDN-R7 [GRANT-FDN, documentation] The Grantee shall maintain time records for staff whose salaries are charged to this grant.
+FDN-R8 [GRANT-FDN, documentation] The Grantee shall submit a financial report each quarter showing expenses charged to this grant.
+
+RECORDS (JSON)
+{
+  "period": "2026-10",
+  "funds": [
+    {
+      "code": "GRANT-FED",
+      "name": "Federal Literacy Subaward",
+      "type": "federal",
+      "awardNumber": "FLS-2026-0412",
+      "periodStart": "2026-07-01",
+      "periodEnd": "2027-06-30",
+      "budgetRemaining": 48200,
+      "sourceDoc": "grant-fed-agreement.pdf"
+    },
+    {
+      "code": "GRANT-FDN",
+      "name": "Hartwell Family Foundation: After-School Tutoring",
+      "type": "foundation",
+      "awardNumber": "HFF-26-118",
+      "periodStart": "2026-09-01",
+      "periodEnd": "2027-08-31",
+      "budgetRemaining": 22500,
+      "sourceDoc": "grant-fdn-agreement.pdf"
+    },
+    {
+      "code": "UNRESTRICTED",
+      "name": "General Operating (Unrestricted)",
+      "type": "unrestricted"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "T-001",
+      "date": "2026-10-03",
+      "vendor": "Bayside Educational Books",
+      "description": "Leveled readers for after-school tutoring sites",
+      "amount": 1240,
+      "account": "Supplies"
+    },
+    {
+      "id": "T-002",
+      "date": "2026-10-06",
+      "vendor": "Literacy Lab Software",
+      "description": "Phonics app licenses for federal literacy program classrooms (25 seats)",
+      "amount": 875,
+      "account": "Software"
+    },
+    {
+      "id": "T-003",
+      "date": "2026-10-09",
+      "vendor": "Brightpath Consulting LLC",
+      "description": "Strategy services - October",
+      "amount": 3500,
+      "account": "Contract Services"
+    },
+    {
+      "id": "T-004",
+      "date": "2026-10-14",
+      "vendor": "Luna Bistro",
+      "description": "Staff appreciation dinner incl. wine",
+      "amount": 412.5,
+      "account": "Meals"
+    },
+    {
+      "id": "T-005",
+      "date": "2026-10-15",
+      "vendor": "Costco",
+      "description": "Student snacks for after-school tutoring sessions",
+      "amount": 286.3,
+      "account": "Program Supplies"
+    },
+    {
+      "id": "T-006",
+      "date": "2026-10-17",
+      "vendor": "Office Depot",
+      "description": "Printer toner and paper",
+      "amount": 186.4,
+      "account": "Office"
+    },
+    {
+      "id": "T-007",
+      "date": "2026-10-20",
+      "vendor": "PG&E",
+      "description": "Office electricity - October",
+      "amount": 342.18,
+      "account": "Utilities"
+    },
+    {
+      "id": "T-008",
+      "date": "2026-10-22",
+      "vendor": "Harborview Event Hall",
+      "description": "Venue deposit - spring fundraising gala",
+      "amount": 2000,
+      "account": "Events"
+    },
+    {
+      "id": "T-009",
+      "date": "2026-10-24",
+      "vendor": "Bayside Educational Books",
+      "description": "Workbooks for federal literacy program grades 2-3",
+      "amount": 640,
+      "account": "Supplies"
+    },
+    {
+      "id": "T-010",
+      "date": "2026-10-28",
+      "vendor": "Zoom",
+      "description": "Annual Zoom Pro subscription",
+      "amount": 149.9,
+      "account": "Software"
+    }
+  ],
+  "payroll": [
+    {
+      "itemId": "PAY-E-01",
+      "employeeId": "E-01",
+      "name": "Maria Lopez",
+      "title": "Program Director",
+      "period": "2026-10",
+      "grossPay": 6200,
+      "benefits": 1240,
+      "plannedAllocation": "GRANT-FED 50% / GRANT-FDN 30% / UNRESTRICTED 20%",
+      "jobDescription": "Directs both the federal literacy program and the after-school tutoring program; also handles board reporting.",
+      "total": 7440
+    },
+    {
+      "itemId": "PAY-E-02",
+      "employeeId": "E-02",
+      "name": "James Chen",
+      "title": "Tutor Coordinator",
+      "period": "2026-10",
+      "grossPay": 4100,
+      "benefits": 820,
+      "plannedAllocation": "GRANT-FDN 60% / GRANT-FED 40%",
+      "jobDescription": "Schedules and supervises tutors at three after-school sites; supports federal program reporting.",
+      "total": 4920
+    },
+    {
+      "itemId": "PAY-E-03",
+      "employeeId": "E-03",
+      "name": "Priya Shah",
+      "title": "Operations Manager",
+      "period": "2026-10",
+      "grossPay": 4800,
+      "benefits": 960,
+      "plannedAllocation": "UNRESTRICTED 100%",
+      "jobDescription": "Runs finance, HR and facilities for the organization.",
+      "total": 5760
+    }
+  ],
+  "timesheets": [
+    {
+      "employeeId": "E-01",
+      "period": "2026-10",
+      "activity": "Federal literacy program delivery and supervision",
+      "fund": "GRANT-FED",
+      "hours": 96
+    },
+    {
+      "employeeId": "E-01",
+      "period": "2026-10",
+      "activity": "After-school tutoring program oversight",
+      "fund": "GRANT-FDN",
+      "hours": 32
+    },
+    {
+      "employeeId": "E-01",
+      "period": "2026-10",
+      "activity": "Board prep and general administration",
+      "fund": "UNRESTRICTED",
+      "hours": 32
+    },
+    {
+      "employeeId": "E-02",
+      "period": "2026-10",
+      "activity": "Tutoring site supervision",
+      "fund": "GRANT-FDN",
+      "hours": 96
+    },
+    {
+      "employeeId": "E-02",
+      "period": "2026-10",
+      "activity": "Federal program reporting",
+      "fund": "GRANT-FED",
+      "hours": 64
+    },
+    {
+      "employeeId": "E-03",
+      "period": "2026-10",
+      "activity": "Finance and operations",
+      "fund": "UNRESTRICTED",
+      "hours": 160
+    }
+  ]
+}
+
+SUPPORTING DOCUMENTS
+--- brightpath-scope-of-work.txt ---
+SCOPE OF WORK AND CONSULTING AGREEMENT
+Contract No. EYL-2026-C07
+
+Client: Eastbay Youth Literacy ("EYL")
+Consultant: Brightpath Consulting LLC
+Effective: October 1, 2026 through December 31, 2026
+Funding source: Federal Literacy Subaward FLS-2026-0412 (GRANT-FED)
+
+1. Purpose
+Brightpath Consulting will design the reading assessment framework for EYL's federal literacy program classrooms (grades 2-3). The work benefits only the federal literacy program. It does not cover EYL's after-school tutoring program, fundraising, or general operations.
+
+2. Deliverables
+2.1 A grade 2-3 reading assessment rubric aligned to the program's phonics curriculum, due October 31, 2026.
+2.2 Two teacher training sessions on administering the rubric in federal literacy program classrooms, delivered by November 20, 2026.
+2.3 A baseline assessment report for the program's fall cohort, due December 15, 2026.
+
+3. Compensation
+Fixed fee of $3,500.00 for October 2026 work on deliverable 2.1, invoiced as "Strategy services - October". Later deliverables are billed separately.
+
+4. Records
+Consultant will keep time and deliverable records and make them available to EYL and the federal pass-through entity on request.
+
+Signed:
+Dana Whitfield, Executive Director, Eastbay Youth Literacy, September 29, 2026
+Owen Park, Principal, Brightpath Consulting LLC, September 30, 2026
+
+(Fictional document created for the FundProof hackathon demo.)
+
+Return 13 items, one for each of: T-001, T-002, T-003, T-004, T-005, T-006, T-007, T-008, T-009, T-010, PAY-E-01, PAY-E-02, PAY-E-03.
+
+OUTPUT FORMAT
+Reply with one JSON object and nothing else: no prose before or after it, no comments. It must match this JSON Schema:
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "supported",
+              "needs_evidence",
+              "not_allowable"
+            ]
+          },
+          "funds": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fund": {
+                  "type": "string",
+                  "enum": [
+                    "GRANT-FED",
+                    "GRANT-FDN",
+                    "UNRESTRICTED"
+                  ]
+                },
+                "percent": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "fund",
+                "percent"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "reason": {
+            "type": "string"
+          },
+          "ruleIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missingEvidence": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "regulations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "itemId",
+          "status",
+          "funds",
+          "reason",
+          "ruleIds",
+          "missingEvidence",
+          "regulations"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,246 @@
+{
+  "items": [
+    {
+      "itemId": "T-001",
+      "status": "supported",
+      "funds": [
+        {
+          "fund": "GRANT-FDN",
+          "percent": 100
+        }
+      ],
+      "reason": "Leveled readers for the after-school tutoring sites are tutoring books, which the foundation grant allows. The federal subaward may not pay for the tutoring program.",
+      "ruleIds": [
+        "FDN-R2",
+        "FED-R6"
+      ],
+      "missingEvidence": null,
+      "regulations": []
+    },
+    {
+      "itemId": "T-002",
+      "status": "supported",
+      "funds": [
+        {
+          "fund": "GRANT-FED",
+          "percent": 100
+        }
+      ],
+      "reason": "Phonics app licenses for federal literacy program classrooms are software licenses used in Program classrooms, which the federal subaward allows.",
+      "ruleIds": [
+        "FED-R2"
+      ],
+      "missingEvidence": null,
+      "regulations": []
+    },
+    {
+      "itemId": "T-003",
+      "status": "needs_evidence",
+      "funds": [],
+      "reason": "\"Strategy services\" from a consultant doesn't say which program it benefits. The federal subaward needs a written agreement describing deliverables, and the foundation needs prior written approval for contractors.",
+      "ruleIds": [
+        "FED-R10",
+        "FDN-R4"
+      ],
+      "missingEvidence": "A signed written agreement or scope of work with Brightpath Consulting describing deliverables that benefit the Program (and the Foundation's prior written approval, if it is to be charged to GRANT-FDN).",
+      "regulations": []
+    },
+    {
+      "itemId": "T-004",
+      "status": "not_allowable",
+      "funds": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100
+        }
+      ],
+      "reason": "A staff appreciation dinner with wine is staff entertainment and includes alcohol, which both grants prohibit.",
+      "ruleIds": [
+        "FED-R3",
+        "FED-R4",
+        "FDN-R5"
+      ],
+      "missingEvidence": null,
+      "regulations": [
+        "2 CFR 200.423",
+        "2 CFR 200.438"
+      ]
+    },
+    {
+      "itemId": "T-005",
+      "status": "supported",
+      "funds": [
+        {
+          "fund": "GRANT-FDN",
+          "percent": 100
+        }
+      ],
+      "reason": "Snacks for after-school tutoring students are expressly allowed by the foundation grant.",
+      "ruleIds": [
+        "FDN-R3"
+      ],
+      "missingEvidence": null,
+      "regulations": []
+    },
+    {
+      "itemId": "T-006",
+      "status": "supported",
+      "funds": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100
+        }
+      ],
+      "reason": "Printer toner and paper are office supplies, a general operating cost neither grant may pay for, so it belongs on unrestricted funds.",
+      "ruleIds": [
+        "FED-R7",
+        "FDN-R6"
+      ],
+      "missingEvidence": null,
+      "regulations": []
+    },
+    {
+      "itemId": "T-007",
+      "status": "supported",
+      "funds": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100
+        }
+      ],
+      "reason": "Office electricity is a utility, a general operating cost neither grant may pay for, so it belongs on unrestricted funds.",
+      "ruleIds": [
+        "FED-R7",
+        "FDN-R6"
+      ],
+      "missingEvidence": null,
+      "regulations": []
+    },
+    {
+      "itemId": "T-008",
+      "status": "not_allowable",
+      "funds": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100
+        }
+      ],
+      "reason": "A venue deposit for a fundraising gala is a fundraising cost, which both grants prohibit.",
+      "ruleIds": [
+        "FED-R5",
+        "FDN-R5"
+      ],
+      "missingEvidence": null,
+      "regulations": [
+        "2 CFR 200.442"
+      ]
+    },
+    {
+      "itemId": "T-009",
+      "status": "supported",
+      "funds": [
+        {
+          "fund": "GRANT-FED",
+          "percent": 100
+        }
+      ],
+      "reason": "Workbooks for the federal literacy program's grades 2-3 are instructional materials for Program classrooms, which the federal subaward allows.",
+      "ruleIds": [
+        "FED-R2"
+      ],
+      "missingEvidence": null,
+      "regulations": []
+    },
+    {
+      "itemId": "T-010",
+      "status": "supported",
+      "funds": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100
+        }
+      ],
+      "reason": "An organization-wide Zoom subscription is a general operating cost not tied to Program classrooms, so it belongs on unrestricted funds.",
+      "ruleIds": [
+        "FED-R7",
+        "FDN-R6"
+      ],
+      "missingEvidence": null,
+      "regulations": []
+    },
+    {
+      "itemId": "PAY-E-01",
+      "status": "supported",
+      "funds": [
+        {
+          "fund": "GRANT-FED",
+          "percent": 60
+        },
+        {
+          "fund": "GRANT-FDN",
+          "percent": 20
+        },
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 20
+        }
+      ],
+      "reason": "Maria's corrected timesheet now shows 96 federal program hours, 32 tutoring oversight hours and 32 admin hours, which matches her job. The split follows those hours, not the budget plan.",
+      "ruleIds": [
+        "FED-R1",
+        "FED-R8",
+        "FED-R11",
+        "FDN-R1",
+        "FDN-R7"
+      ],
+      "missingEvidence": null,
+      "regulations": [
+        "2 CFR 200.430(i)",
+        "2 CFR 200.405"
+      ]
+    },
+    {
+      "itemId": "PAY-E-02",
+      "status": "supported",
+      "funds": [
+        {
+          "fund": "GRANT-FDN",
+          "percent": 60
+        },
+        {
+          "fund": "GRANT-FED",
+          "percent": 40
+        }
+      ],
+      "reason": "James's timesheet (96 hours tutoring supervision, 64 hours federal program) matches his job description, so the split follows his logged hours.",
+      "ruleIds": [
+        "FDN-R1",
+        "FDN-R7",
+        "FED-R8",
+        "FED-R11"
+      ],
+      "missingEvidence": null,
+      "regulations": [
+        "2 CFR 200.430(i)",
+        "2 CFR 200.405"
+      ]
+    },
+    {
+      "itemId": "PAY-E-03",
+      "status": "supported",
+      "funds": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100
+        }
+      ],
+      "reason": "Priya runs finance, HR and facilities, and all 160 of her hours are general operations, so her pay belongs on unrestricted funds.",
+      "ruleIds": [
+        "FED-R7",
+        "FDN-R6"
+      ],
+      "missingEvidence": null,
+      "regulations": []
+    }
+  ]
+}

@@ -1,0 +1,735 @@
+{
+  "generatedAt": "2026-11-13T23:42:02.546Z",
+  "mode": "cache",
+  "org": "Eastbay Youth Literacy",
+  "period": "2026-10",
+  "funds": [
+    {
+      "code": "GRANT-FED",
+      "name": "Federal Literacy Subaward",
+      "type": "federal",
+      "awardNumber": "FLS-2026-0412",
+      "periodStart": "2026-07-01",
+      "periodEnd": "2027-06-30",
+      "budgetRemaining": 48200,
+      "sourceDoc": "grant-fed-agreement.pdf"
+    },
+    {
+      "code": "GRANT-FDN",
+      "name": "Hartwell Family Foundation: After-School Tutoring",
+      "type": "foundation",
+      "awardNumber": "HFF-26-118",
+      "periodStart": "2026-09-01",
+      "periodEnd": "2027-08-31",
+      "budgetRemaining": 22500,
+      "sourceDoc": "grant-fdn-agreement.pdf"
+    },
+    {
+      "code": "UNRESTRICTED",
+      "name": "General Operating (Unrestricted)",
+      "type": "unrestricted"
+    }
+  ],
+  "rules": [
+    {
+      "id": "FED-R1",
+      "fund": "GRANT-FED",
+      "kind": "allowed",
+      "summary": "Salaries and fringe benefits can be charged only for staff time spent teaching or directly supervising Program instruction.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 1,
+        "quote": "Salaries and fringe benefits are allowable for staff time spent delivering or directly supervising Program instruction.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FED-R2",
+      "fund": "GRANT-FED",
+      "kind": "allowed",
+      "summary": "Books, instructional materials, and software licenses used in Program classrooms are allowable.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 1,
+        "quote": "Instructional materials, books, and software licenses used in Program classrooms are allowable.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FED-R3",
+      "fund": "GRANT-FED",
+      "kind": "disallowed",
+      "summary": "Alcohol cannot be charged to the subaward.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 1,
+        "quote": "Costs of alcoholic beverages are unallowable under 2 CFR 200.423.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FED-R4",
+      "fund": "GRANT-FED",
+      "kind": "disallowed",
+      "summary": "Entertainment, including social activities and staff celebrations, cannot be charged to the subaward.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 1,
+        "quote": "Entertainment costs, including social activities and staff celebrations, are unallowable under 2 CFR 200.438.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FED-R5",
+      "fund": "GRANT-FED",
+      "kind": "disallowed",
+      "summary": "Fundraising costs cannot be charged to the subaward.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 1,
+        "quote": "Costs of fundraising are unallowable under 2 CFR 200.442.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FED-R6",
+      "fund": "GRANT-FED",
+      "kind": "disallowed",
+      "summary": "Costs of the organization's other programs, such as after-school tutoring, cannot be charged to this subaward.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 1,
+        "quote": "Costs of the Subrecipient's other programs, including its after-school tutoring program, may not be charged to this subaward.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FED-R7",
+      "fund": "GRANT-FED",
+      "kind": "disallowed",
+      "summary": "General operating costs like rent, utilities, and office supplies cannot be charged directly to the subaward.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 1,
+        "quote": "General operating costs such as rent, utilities, and office supplies may not be charged directly to this subaward.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FED-R8",
+      "fund": "GRANT-FED",
+      "kind": "documentation",
+      "summary": "Personnel charges must be backed by records of the work actually performed.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 2,
+        "quote": "Charges for personnel must be based on records that accurately reflect the work performed, as required by 2 CFR 200.430(i).",
+        "verified": true
+      }
+    },
+    {
+      "id": "FED-R9",
+      "fund": "GRANT-FED",
+      "kind": "documentation",
+      "summary": "A budget estimate by itself is not enough to support a charge to the subaward.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 2,
+        "quote": "Budget estimates alone do not qualify as support for charges to this subaward.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FED-R10",
+      "fund": "GRANT-FED",
+      "kind": "documentation",
+      "summary": "Contracted services need a written agreement describing deliverables that benefit the Program.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 2,
+        "quote": "Contracted services must be supported by a written agreement that describes deliverables benefiting the Program.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FED-R11",
+      "fund": "GRANT-FED",
+      "kind": "allocation",
+      "summary": "A cost shared with other activities must be split in proportion to the benefit each one receives.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 2,
+        "quote": "Costs that benefit both this subaward and other activities must be allocated in proportion to the benefits received, consistent with 2 CFR 200.405.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FED-R12",
+      "fund": "GRANT-FED",
+      "kind": "allocation",
+      "summary": "Costs cannot be moved onto this subaward to cover shortfalls on other awards.",
+      "citation": {
+        "sourceDoc": "grant-fed-agreement.pdf",
+        "page": 2,
+        "quote": "Costs may not be shifted to this subaward to overcome funding shortfalls on other awards.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FDN-R1",
+      "fund": "GRANT-FDN",
+      "kind": "allocation",
+      "summary": "Tutoring staff salaries can be charged only in proportion to the time each person worked on the Program.",
+      "citation": {
+        "sourceDoc": "grant-fdn-agreement.pdf",
+        "page": 1,
+        "quote": "Grant funds may be used for tutoring program staff salaries in proportion to time worked on the Program.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FDN-R2",
+      "fund": "GRANT-FDN",
+      "kind": "allowed",
+      "summary": "Tutoring books and supplies are allowable.",
+      "citation": {
+        "sourceDoc": "grant-fdn-agreement.pdf",
+        "page": 1,
+        "quote": "Grant funds may be used for tutoring books and supplies.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FDN-R3",
+      "fund": "GRANT-FDN",
+      "kind": "allowed",
+      "summary": "Snacks for students in the program are allowable.",
+      "citation": {
+        "sourceDoc": "grant-fdn-agreement.pdf",
+        "page": 1,
+        "quote": "Grant funds may be used for snacks for participating students.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FDN-R4",
+      "fund": "GRANT-FDN",
+      "kind": "disallowed",
+      "summary": "Consultants or contractors cannot be charged without the Foundation's prior written approval.",
+      "citation": {
+        "sourceDoc": "grant-fdn-agreement.pdf",
+        "page": 1,
+        "quote": "Grant funds may not be used for consultants or contractors without the Foundation's prior written approval.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FDN-R5",
+      "fund": "GRANT-FDN",
+      "kind": "disallowed",
+      "summary": "Fundraising events, alcohol, and staff entertainment cannot be charged to the grant.",
+      "citation": {
+        "sourceDoc": "grant-fdn-agreement.pdf",
+        "page": 1,
+        "quote": "Grant funds may not be used for fundraising events, alcohol, or staff entertainment.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FDN-R6",
+      "fund": "GRANT-FDN",
+      "kind": "disallowed",
+      "summary": "General operating costs like rent, utilities, and office supplies cannot be charged to the grant.",
+      "citation": {
+        "sourceDoc": "grant-fdn-agreement.pdf",
+        "page": 1,
+        "quote": "Grant funds may not be used for general operating costs such as rent, utilities, or office supplies.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FDN-R7",
+      "fund": "GRANT-FDN",
+      "kind": "documentation",
+      "summary": "Time records must be kept for every staff member whose salary is charged to the grant.",
+      "citation": {
+        "sourceDoc": "grant-fdn-agreement.pdf",
+        "page": 2,
+        "quote": "The Grantee shall maintain time records for staff whose salaries are charged to this grant.",
+        "verified": true
+      }
+    },
+    {
+      "id": "FDN-R8",
+      "fund": "GRANT-FDN",
+      "kind": "documentation",
+      "summary": "A quarterly financial report showing the expenses charged to the grant must be submitted.",
+      "citation": {
+        "sourceDoc": "grant-fdn-agreement.pdf",
+        "page": 2,
+        "quote": "The Grantee shall submit a financial report each quarter showing expenses charged to this grant.",
+        "verified": true
+      }
+    }
+  ],
+  "allocations": [
+    {
+      "itemId": "T-001",
+      "itemType": "transaction",
+      "label": "Bayside Educational Books",
+      "description": "Leveled readers for after-school tutoring sites",
+      "amount": 1240,
+      "status": "supported",
+      "splits": [
+        {
+          "fund": "GRANT-FDN",
+          "percent": 100,
+          "amount": 1240
+        }
+      ],
+      "reason": "Leveled readers for the after-school tutoring sites are tutoring books, which the foundation grant allows. The federal subaward may not pay for the tutoring program.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 1,
+          "quote": "Grant funds may be used for tutoring books and supplies.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 1,
+          "quote": "Costs of the Subrecipient's other programs, including its after-school tutoring program, may not be charged to this subaward.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "itemId": "T-002",
+      "itemType": "transaction",
+      "label": "Literacy Lab Software",
+      "description": "Phonics app licenses for federal literacy program classrooms (25 seats)",
+      "amount": 875,
+      "status": "supported",
+      "splits": [
+        {
+          "fund": "GRANT-FED",
+          "percent": 100,
+          "amount": 875
+        }
+      ],
+      "reason": "Phonics app licenses for federal literacy program classrooms are software licenses used in Program classrooms, which the federal subaward allows.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 1,
+          "quote": "Instructional materials, books, and software licenses used in Program classrooms are allowable.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "itemId": "T-003",
+      "itemType": "transaction",
+      "label": "Brightpath Consulting LLC",
+      "description": "Strategy services - October",
+      "amount": 3500,
+      "status": "needs_evidence",
+      "splits": [],
+      "reason": "\"Strategy services\" from a consultant doesn't say which program it benefits. The federal subaward needs a written agreement describing deliverables, and the foundation needs prior written approval for contractors.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 2,
+          "quote": "Contracted services must be supported by a written agreement that describes deliverables benefiting the Program.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 1,
+          "quote": "Grant funds may not be used for consultants or contractors without the Foundation's prior written approval.",
+          "verified": true
+        }
+      ],
+      "missingEvidence": "A signed written agreement or scope of work with Brightpath Consulting describing deliverables that benefit the Program (and the Foundation's prior written approval, if it is to be charged to GRANT-FDN)."
+    },
+    {
+      "itemId": "T-004",
+      "itemType": "transaction",
+      "label": "Luna Bistro",
+      "description": "Staff appreciation dinner incl. wine",
+      "amount": 412.5,
+      "status": "not_allowable",
+      "splits": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100,
+          "amount": 412.5
+        }
+      ],
+      "reason": "A staff appreciation dinner with wine is staff entertainment and includes alcohol, which both grants prohibit.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 1,
+          "quote": "Costs of alcoholic beverages are unallowable under 2 CFR 200.423.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 1,
+          "quote": "Entertainment costs, including social activities and staff celebrations, are unallowable under 2 CFR 200.438.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 1,
+          "quote": "Grant funds may not be used for fundraising events, alcohol, or staff entertainment.",
+          "verified": true
+        }
+      ],
+      "regulations": [
+        "2 CFR 200.423",
+        "2 CFR 200.438"
+      ]
+    },
+    {
+      "itemId": "T-005",
+      "itemType": "transaction",
+      "label": "Costco",
+      "description": "Student snacks for after-school tutoring sessions",
+      "amount": 286.3,
+      "status": "supported",
+      "splits": [
+        {
+          "fund": "GRANT-FDN",
+          "percent": 100,
+          "amount": 286.3
+        }
+      ],
+      "reason": "Snacks for after-school tutoring students are expressly allowed by the foundation grant.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 1,
+          "quote": "Grant funds may be used for snacks for participating students.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "itemId": "T-006",
+      "itemType": "transaction",
+      "label": "Office Depot",
+      "description": "Printer toner and paper",
+      "amount": 186.4,
+      "status": "supported",
+      "splits": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100,
+          "amount": 186.4
+        }
+      ],
+      "reason": "Printer toner and paper are office supplies, a general operating cost neither grant may pay for, so it belongs on unrestricted funds.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 1,
+          "quote": "General operating costs such as rent, utilities, and office supplies may not be charged directly to this subaward.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 1,
+          "quote": "Grant funds may not be used for general operating costs such as rent, utilities, or office supplies.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "itemId": "T-007",
+      "itemType": "transaction",
+      "label": "PG&E",
+      "description": "Office electricity - October",
+      "amount": 342.18,
+      "status": "supported",
+      "splits": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100,
+          "amount": 342.18
+        }
+      ],
+      "reason": "Office electricity is a utility, a general operating cost neither grant may pay for, so it belongs on unrestricted funds.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 1,
+          "quote": "General operating costs such as rent, utilities, and office supplies may not be charged directly to this subaward.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 1,
+          "quote": "Grant funds may not be used for general operating costs such as rent, utilities, or office supplies.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "itemId": "T-008",
+      "itemType": "transaction",
+      "label": "Harborview Event Hall",
+      "description": "Venue deposit - spring fundraising gala",
+      "amount": 2000,
+      "status": "not_allowable",
+      "splits": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100,
+          "amount": 2000
+        }
+      ],
+      "reason": "A venue deposit for a fundraising gala is a fundraising cost, which both grants prohibit.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 1,
+          "quote": "Costs of fundraising are unallowable under 2 CFR 200.442.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 1,
+          "quote": "Grant funds may not be used for fundraising events, alcohol, or staff entertainment.",
+          "verified": true
+        }
+      ],
+      "regulations": [
+        "2 CFR 200.442"
+      ]
+    },
+    {
+      "itemId": "T-009",
+      "itemType": "transaction",
+      "label": "Bayside Educational Books",
+      "description": "Workbooks for federal literacy program grades 2-3",
+      "amount": 640,
+      "status": "supported",
+      "splits": [
+        {
+          "fund": "GRANT-FED",
+          "percent": 100,
+          "amount": 640
+        }
+      ],
+      "reason": "Workbooks for the federal literacy program's grades 2-3 are instructional materials for Program classrooms, which the federal subaward allows.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 1,
+          "quote": "Instructional materials, books, and software licenses used in Program classrooms are allowable.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "itemId": "T-010",
+      "itemType": "transaction",
+      "label": "Zoom",
+      "description": "Annual Zoom Pro subscription",
+      "amount": 149.9,
+      "status": "supported",
+      "splits": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100,
+          "amount": 149.9
+        }
+      ],
+      "reason": "An organization-wide Zoom subscription is a general operating cost not tied to Program classrooms, so it belongs on unrestricted funds.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 1,
+          "quote": "General operating costs such as rent, utilities, and office supplies may not be charged directly to this subaward.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 1,
+          "quote": "Grant funds may not be used for general operating costs such as rent, utilities, or office supplies.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "itemId": "PAY-E-01",
+      "itemType": "payroll",
+      "label": "Maria Lopez",
+      "description": "Program Director, 2026-10 payroll",
+      "amount": 7440,
+      "status": "supported",
+      "splits": [
+        {
+          "fund": "GRANT-FED",
+          "percent": 60,
+          "amount": 4464
+        },
+        {
+          "fund": "GRANT-FDN",
+          "percent": 20,
+          "amount": 1488
+        },
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 20,
+          "amount": 1488
+        }
+      ],
+      "reason": "Maria's corrected timesheet now shows 96 federal program hours, 32 tutoring oversight hours and 32 admin hours, which matches her job. The split follows those hours, not the budget plan.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 1,
+          "quote": "Salaries and fringe benefits are allowable for staff time spent delivering or directly supervising Program instruction.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 2,
+          "quote": "Charges for personnel must be based on records that accurately reflect the work performed, as required by 2 CFR 200.430(i).",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 2,
+          "quote": "Costs that benefit both this subaward and other activities must be allocated in proportion to the benefits received, consistent with 2 CFR 200.405.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 1,
+          "quote": "Grant funds may be used for tutoring program staff salaries in proportion to time worked on the Program.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 2,
+          "quote": "The Grantee shall maintain time records for staff whose salaries are charged to this grant.",
+          "verified": true
+        }
+      ],
+      "regulations": [
+        "2 CFR 200.430(i)",
+        "2 CFR 200.405"
+      ]
+    },
+    {
+      "itemId": "PAY-E-02",
+      "itemType": "payroll",
+      "label": "James Chen",
+      "description": "Tutor Coordinator, 2026-10 payroll",
+      "amount": 4920,
+      "status": "supported",
+      "splits": [
+        {
+          "fund": "GRANT-FDN",
+          "percent": 60,
+          "amount": 2952
+        },
+        {
+          "fund": "GRANT-FED",
+          "percent": 40,
+          "amount": 1968
+        }
+      ],
+      "reason": "James's timesheet (96 hours tutoring supervision, 64 hours federal program) matches his job description, so the split follows his logged hours.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 1,
+          "quote": "Grant funds may be used for tutoring program staff salaries in proportion to time worked on the Program.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 2,
+          "quote": "The Grantee shall maintain time records for staff whose salaries are charged to this grant.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 2,
+          "quote": "Charges for personnel must be based on records that accurately reflect the work performed, as required by 2 CFR 200.430(i).",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 2,
+          "quote": "Costs that benefit both this subaward and other activities must be allocated in proportion to the benefits received, consistent with 2 CFR 200.405.",
+          "verified": true
+        }
+      ],
+      "regulations": [
+        "2 CFR 200.430(i)",
+        "2 CFR 200.405"
+      ]
+    },
+    {
+      "itemId": "PAY-E-03",
+      "itemType": "payroll",
+      "label": "Priya Shah",
+      "description": "Operations Manager, 2026-10 payroll",
+      "amount": 5760,
+      "status": "supported",
+      "splits": [
+        {
+          "fund": "UNRESTRICTED",
+          "percent": 100,
+          "amount": 5760
+        }
+      ],
+      "reason": "Priya runs finance, HR and facilities, and all 160 of her hours are general operations, so her pay belongs on unrestricted funds.",
+      "citations": [
+        {
+          "sourceDoc": "grant-fed-agreement.pdf",
+          "page": 1,
+          "quote": "General operating costs such as rent, utilities, and office supplies may not be charged directly to this subaward.",
+          "verified": true
+        },
+        {
+          "sourceDoc": "grant-fdn-agreement.pdf",
+          "page": 1,
+          "quote": "Grant funds may not be used for general operating costs such as rent, utilities, or office supplies.",
+          "verified": true
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "itemCount": 13,
+    "totalAmount": 27752.28,
+    "byStatus": {
+      "supported": {
+        "count": 10,
+        "amount": 21839.78
+      },
+      "needs_evidence": {
+        "count": 1,
+        "amount": 3500
+      },
+      "not_allowable": {
+        "count": 2,
+        "amount": 2412.5
+      }
+    },
+    "byFund": {
+      "GRANT-FED": 7947,
+      "GRANT-FDN": 5966.3,
+      "UNRESTRICTED": 10338.98
+    },
+    "citationsVerified": 29,
+    "citationsTotal": 29
+  }
+}

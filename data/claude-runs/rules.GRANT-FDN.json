@@ -1,0 +1,52 @@
+{
+  "rules": [
+    {
+      "kind": "allocation",
+      "summary": "Tutoring staff salaries can be charged only in proportion to the time each person worked on the Program.",
+      "page": 1,
+      "quote": "Grant funds may be used for tutoring program staff salaries in proportion to time worked on the Program."
+    },
+    {
+      "kind": "allowed",
+      "summary": "Tutoring books and supplies are allowable.",
+      "page": 1,
+      "quote": "Grant funds may be used for tutoring books and supplies."
+    },
+    {
+      "kind": "allowed",
+      "summary": "Snacks for students in the program are allowable.",
+      "page": 1,
+      "quote": "Grant funds may be used for snacks for participating students."
+    },
+    {
+      "kind": "disallowed",
+      "summary": "Consultants or contractors cannot be charged without the Foundation's prior written approval.",
+      "page": 1,
+      "quote": "Grant funds may not be used for consultants or contractors without the Foundation's prior written approval."
+    },
+    {
+      "kind": "disallowed",
+      "summary": "Fundraising events, alcohol, and staff entertainment cannot be charged to the grant.",
+      "page": 1,
+      "quote": "Grant funds may not be used for fundraising events, alcohol, or staff entertainment."
+    },
+    {
+      "kind": "disallowed",
+      "summary": "General operating costs like rent, utilities, and office supplies cannot be charged to the grant.",
+      "page": 1,
+      "quote": "Grant funds may not be used for general operating costs such as rent, utilities, or office supplies."
+    },
+    {
+      "kind": "documentation",
+      "summary": "Time records must be kept for every staff member whose salary is charged to the grant.",
+      "page": 2,
+      "quote": "The Grantee shall maintain time records for staff whose salaries are charged to this grant."
+    },
+    {
+      "kind": "documentation",
+      "summary": "A quarterly financial report showing the expenses charged to the grant must be submitted.",
+      "page": 2,
+      "quote": "The Grantee shall submit a financial report each quarter showing expenses charged to this grant."
+    }
+  ]
+}
