@@ -37,6 +37,38 @@ async function getRules(ds: Dataset): Promise<GrantRule[]> {
   }
 }
 
+/**
+ * A "supported" charge to a grant needs proof in code, not just Claude's word:
+ * at least one verified quote from that grant's own agreement, and room left in its budget.
+ */
+function supportProblem(
+  splits: { fund: FundCode; amount: number }[],
+  cited: { fund: FundCode; citation: Citation }[],
+  usedByFund: Map<FundCode, number>,
+  ds: Dataset,
+): { why: string; missing: string } | null {
+  for (const sp of splits) {
+    const fund = ds.funds.find((f) => f.code === sp.fund);
+    if (!fund || fund.type === "unrestricted") continue;
+    if (!cited.some((c) => c.fund === sp.fund && c.citation.verified)) {
+      return {
+        why: `no verified clause from the ${fund.name} agreement backs the ${sp.fund} charge.`,
+        missing: `The clause in the ${fund.name} agreement that allows this cost.`,
+      };
+    }
+    if (fund.budgetRemaining !== undefined) {
+      const after = Math.round(((usedByFund.get(sp.fund) ?? 0) + sp.amount) * 100) / 100;
+      if (after > fund.budgetRemaining) {
+        return {
+          why: `charging $${sp.amount.toFixed(2)} would exceed the $${fund.budgetRemaining.toFixed(2)} left in the ${sp.fund} budget.`,
+          missing: "A budget amendment or another fund for this cost.",
+        };
+      }
+    }
+  }
+  return null;
+}
+
 const normReg = (s: string) => s.replace(/§\s*/g, "").replace(/\s+/g, " ").trim();
 
 /**
@@ -157,6 +189,9 @@ export function buildResult(ds: Dataset, rules: GrantRule[], proposals: Proposal
     })),
   ];
 
+  // Grant money already proposed in this run, in item order, to check against each fund's remaining budget.
+  const usedByFund = new Map<FundCode, number>();
+
   const allocations: Allocation[] = items.map((item) => {
     const base = {
       itemId: item.itemId,
@@ -177,19 +212,36 @@ export function buildResult(ds: Dataset, rules: GrantRule[], proposals: Proposal
       };
     }
     // Only rule ids that exist are cited; each quote is re-checked against the PDF text.
-    const citations = [...new Set(p.ruleIds)]
-      .map((id) => rules.find((r) => r.id === id)?.citation)
-      .filter((c): c is NonNullable<typeof c> => !!c)
-      .map((c) => safeVerify(c, ds));
+    const cited = [...new Set(p.ruleIds)]
+      .map((id) => rules.find((r) => r.id === id))
+      .filter((r): r is GrantRule => !!r)
+      .map((r) => ({ fund: r.fund, citation: safeVerify(r.citation, ds) }));
+    const citations = cited.map((c) => c.citation);
     const regs = checkedRegulations(p.regulations, p.ruleIds, rules, ds);
     const regulations = regs.length ? { regulations: regs } : {};
     try {
       // The DATA helpers throw on invalid inputs (bad percents, mixed periods...). Fail closed for this item only.
       const d = decide(item, p, ds);
+      const splits = d.parts.length ? splitByPercent(item.amount, d.parts) : [];
+      if (d.status === "supported") {
+        const held = supportProblem(splits, cited, usedByFund, ds);
+        if (held) {
+          return {
+            ...base,
+            status: "needs_evidence" as const,
+            splits: [],
+            reason: `${d.reason} (Held for review: ${held.why})`,
+            citations,
+            missingEvidence: held.missing,
+            ...regulations,
+          };
+        }
+        for (const sp of splits) usedByFund.set(sp.fund, (usedByFund.get(sp.fund) ?? 0) + sp.amount);
+      }
       return {
         ...base,
         status: d.status,
-        splits: d.parts.length ? splitByPercent(item.amount, d.parts) : [],
+        splits,
         reason: d.reason,
         citations,
         ...(d.missingEvidence ? { missingEvidence: d.missingEvidence } : {}),

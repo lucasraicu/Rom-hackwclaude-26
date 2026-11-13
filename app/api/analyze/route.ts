@@ -40,7 +40,9 @@ async function fromCache(scenario: Scenario): Promise<AnalysisResult> {
 }
 
 export async function POST(req: Request) {
-  const body = (await req.json().catch(() => ({}))) as AnalyzeRequest;
+  const raw: unknown = await req.json().catch(() => ({}));
+  // A null, array or non-object body is treated as an empty request rather than crashing the route.
+  const body = (raw && typeof raw === "object" && !Array.isArray(raw) ? raw : {}) as AnalyzeRequest;
   const fixed = !!body.timesheetsCsv;
   const mode = process.env.FUNDPROOF_MOCK;
   if (body.datasetId !== undefined) {
