@@ -2,6 +2,8 @@
 
 All example records are fictional. API calls are disabled with `FUNDPROOF_MOCK=1`.
 
+The supported Eastbay demo bundle is `data/inputs/`, paired with the existing initial/corrected fixtures and recorded caches. The older top-level `demo/` bundle uses different transaction/time-record schemas and is not supported by the current upload normalizer or exact-match demo. Do not use it as an interchangeable source for Eastbay results.
+
 `mock-response.json` is a generated example response for the XLSX/email bundle below. It is explicitly labeled `mock`, retains the uploaded expense's ID and source location, and contains no model-approved eligibility claims.
 
 Upload `transactions.xlsx` and optionally `approval.eml` to try one expense with spreadsheet provenance. You can also upload the existing CSVs and grant PDFs from `data/inputs/` as a 13-cost bundle. Include either `timesheets.csv` or `timesheets-corrected.csv`; replace the original rather than including both.
