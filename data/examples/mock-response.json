@@ -1,0 +1,114 @@
+{
+  "generatedAt": "2026-11-13T23:13:37.670Z",
+  "mode": "mock",
+  "org": "Fictional nonprofit upload example",
+  "period": "2026-10",
+  "funds": [
+    {
+      "code": "UNRESTRICTED",
+      "type": "unrestricted",
+      "name": "Unrestricted (review required)"
+    }
+  ],
+  "rules": [],
+  "allocations": [
+    {
+      "itemId": "U-001",
+      "itemType": "transaction",
+      "label": "Community Books",
+      "description": "Readers for the after-school program",
+      "amount": 125.5,
+      "status": "needs_evidence",
+      "splits": [],
+      "citations": [],
+      "reason": "Simulated Claude response: this uploaded expense is awaiting review. No grant eligibility or source evidence has been assessed.",
+      "missingEvidence": "Review the expense, applicable grant terms, and supporting documents before proposing a funding split.",
+      "sourceRefs": [
+        {
+          "documentId": "5301a8e5-b724-4253-9d7e-59fb82f305b3",
+          "filename": "transactions.xlsx",
+          "sheet": "Expenses",
+          "row": 2
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "itemCount": 1,
+    "totalAmount": 125.5,
+    "byStatus": {
+      "supported": {
+        "count": 0,
+        "amount": 0
+      },
+      "needs_evidence": {
+        "count": 1,
+        "amount": 125.5
+      },
+      "not_allowable": {
+        "count": 0,
+        "amount": 0
+      }
+    },
+    "byFund": {
+      "GRANT-FED": 0,
+      "GRANT-FDN": 0,
+      "UNRESTRICTED": 0
+    },
+    "citationsVerified": 0,
+    "citationsTotal": 0
+  },
+  "documents": [
+    {
+      "id": "5301a8e5-b724-4253-9d7e-59fb82f305b3",
+      "filename": "transactions.xlsx",
+      "mimeType": "application/octet-stream",
+      "kind": "transactions",
+      "parseStatus": "parsed",
+      "warnings": [],
+      "tables": [
+        {
+          "sheet": "Expenses",
+          "columns": [
+            "Transaction ID",
+            "Transaction Date",
+            "Merchant",
+            "Memo",
+            "Total",
+            "Category"
+          ],
+          "rows": [
+            [
+              "U-001",
+              "2026-10-08",
+              "Community Books",
+              "Readers for the after-school program",
+              "125.5",
+              "Supplies"
+            ]
+          ]
+        }
+      ],
+      "linkedItemIds": [
+        "U-001"
+      ]
+    },
+    {
+      "id": "c5716fe3-3bc7-4125-9c9a-6934a59976e6",
+      "filename": "approval.eml",
+      "mimeType": "application/octet-stream",
+      "kind": "email",
+      "parseStatus": "parsed",
+      "warnings": [
+        "Preserved as supporting text only. Mock mode does not extract new costs, verify approvals, or establish that this document supports an allocation."
+      ],
+      "text": "Subject: Fictional program supplies clarification\nDate: 2026-10-09T17:00:00.000Z\nFrom: program-director@example.org\nSynthetic example only. The Community Books purchase U-001 was for the after-school program.\nThis email alone does not establish grant eligibility or replace an expense receipt.\n"
+    }
+  ],
+  "warnings": [
+    "No recognized PDF grant agreement was uploaded; grant rules and eligibility remain unverified.",
+    "approval.eml: Preserved as supporting text only. Mock mode does not extract new costs, verify approvals, or establish that this document supports an allocation.",
+    "Mock Claude response only: no API call, eligibility determination, or approval is performed.",
+    "MOCK: Claude was not called. All uploaded costs remain needs_evidence; proposed payroll splits are illustrative and unapproved."
+  ]
+}

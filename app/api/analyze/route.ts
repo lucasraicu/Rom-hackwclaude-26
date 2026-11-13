@@ -1,4 +1,5 @@
 // AI lane. POST /api/analyze  body: AnalyzeRequest  ->  AnalysisResult
+// datasetId (uploaded files) is analyzed only in mock mode by lib/data/mockAnalysis.ts; never served demo fixtures.
 // FUNDPROOF_MOCK=1 returns fixtures so the UI never waits on Claude.
 // FUNDPROOF_MOCK=cache returns the recorded Claude run for this input from data/cache (initial and after-fix fall back to fixtures).
 import fs from "node:fs/promises";
@@ -9,6 +10,9 @@ import initial from "@/lib/fixtures/analysis.initial.json";
 import afterFix from "@/lib/fixtures/analysis.after-fix.json";
 import { runAnalysis } from "@/lib/pipeline";
 import type { AnalysisResult, AnalyzeRequest } from "@/lib/types";
+import { loadUploadedDataset } from "@/lib/data/uploadStore";
+import { UploadError } from "@/lib/data/uploadTypes";
+import { buildMockAnalysis } from "@/lib/data/mockAnalysis";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -39,6 +43,25 @@ export async function POST(req: Request) {
   const body = (await req.json().catch(() => ({}))) as AnalyzeRequest;
   const fixed = !!body.timesheetsCsv;
   const mode = process.env.FUNDPROOF_MOCK;
+  if (body.datasetId !== undefined) {
+    if (typeof body.datasetId !== "string" || !body.datasetId.trim()) {
+      return NextResponse.json({ error: "datasetId must be a non-empty string." }, { status: 400 });
+    }
+    if (mode !== "1" && mode !== "cache") {
+      return NextResponse.json(
+        { error: "Uploaded datasets can only be analyzed in mock mode today. Set FUNDPROOF_MOCK=1 and restart." },
+        { status: 501 },
+      );
+    }
+    try {
+      const ds = await loadUploadedDataset(body.datasetId);
+      await pause(1200);
+      return NextResponse.json(buildMockAnalysis(ds));
+    } catch (err) {
+      const status = err instanceof UploadError ? err.status : 500;
+      return NextResponse.json({ error: err instanceof Error ? err.message : String(err) }, { status });
+    }
+  }
   if (mode === "1" || mode === "cache") {
     await pause(1200); // feels like real work in the UI
     if (mode === "1") return NextResponse.json((fixed ? afterFix : initial) as AnalysisResult);
