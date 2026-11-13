@@ -8,18 +8,27 @@ import { verifyCitation } from "./data/verifyCitations";
 import { summarize } from "./data/summarize";
 import { extractRulesForFund } from "./ai/extractRules";
 import { proposeAllocations, type Proposal } from "./ai/proposeAllocations";
-import { FUND_CODES, type Allocation, type AnalysisResult, type Dataset, type FundCode, type GrantRule } from "./types";
+import { FUND_CODES, type Allocation, type Citation, type AnalysisResult, type Dataset, type FundCode, type GrantRule } from "./types";
 
 const RULES_CACHE = path.join(process.cwd(), "data", "cache", "grant-rules.json");
+
+/** A quote that can't be checked counts as unverified; it never aborts the run. */
+function safeVerify(c: Citation, ds: Dataset): Citation {
+  try {
+    return verifyCitation(c, ds.grantDocs);
+  } catch {
+    return { ...c, verified: false };
+  }
+}
 
 /** Grant rules rarely change, so they are cached after the first good run. Delete the file to re-extract. */
 async function getRules(ds: Dataset): Promise<GrantRule[]> {
   try {
     const cached: GrantRule[] = JSON.parse(await fs.readFile(RULES_CACHE, "utf8"));
-    return cached.map((r) => ({ ...r, citation: verifyCitation(r.citation, ds.grantDocs) }));
+    return cached.map((r) => ({ ...r, citation: safeVerify(r.citation, ds) }));
   } catch {
     const perFund = await Promise.all(ds.funds.map(extractRulesForFund));
-    const rules = perFund.flat().map((r) => ({ ...r, citation: verifyCitation(r.citation, ds.grantDocs) }));
+    const rules = perFund.flat().map((r) => ({ ...r, citation: safeVerify(r.citation, ds) }));
     const ok = rules.filter((r) => r.citation.verified).length;
     console.log(`[fundproof] extracted ${rules.length} grant rules, ${ok} quotes verified against the PDFs`);
     await fs.mkdir(path.dirname(RULES_CACHE), { recursive: true });
@@ -78,7 +87,7 @@ function decide(item: Item, p: Proposal, ds: Dataset) {
 
   if (status === "supported") {
     const total = parts.reduce((s, f) => s + f.percent, 0);
-    if (!parts.length || Math.abs(total - 100) > 0.05) {
+    if (!parts.length || !(Math.abs(total - 100) <= 0.05)) {
       return needsEvidence(
         `${reason} (Held for review: the proposed split adds up to ${total}%, not 100%.)`,
         "A reviewer's decision on how to split this cost.",
@@ -150,21 +159,36 @@ export function buildResult(ds: Dataset, rules: GrantRule[], proposals: Proposal
         missingEvidence: "A reviewer's decision on this item.",
       };
     }
-    const d = decide(item, p, ds);
     // Only rule ids that exist are cited; each quote is re-checked against the PDF text.
     const citations = [...new Set(p.ruleIds)]
       .map((id) => rules.find((r) => r.id === id)?.citation)
       .filter((c): c is NonNullable<typeof c> => !!c)
-      .map((c) => verifyCitation(c, ds.grantDocs));
-    return {
-      ...base,
-      status: d.status,
-      splits: d.parts.length ? splitByPercent(item.amount, d.parts) : [],
-      reason: d.reason,
-      citations,
-      ...(d.missingEvidence ? { missingEvidence: d.missingEvidence } : {}),
-      ...(p.regulations.length ? { regulations: p.regulations } : {}),
-    };
+      .map((c) => safeVerify(c, ds));
+    const regulations = p.regulations.length ? { regulations: p.regulations } : {};
+    try {
+      // The DATA helpers throw on invalid inputs (bad percents, mixed periods...). Fail closed for this item only.
+      const d = decide(item, p, ds);
+      return {
+        ...base,
+        status: d.status,
+        splits: d.parts.length ? splitByPercent(item.amount, d.parts) : [],
+        reason: d.reason,
+        citations,
+        ...(d.missingEvidence ? { missingEvidence: d.missingEvidence } : {}),
+        ...regulations,
+      };
+    } catch (err) {
+      const why = err instanceof Error ? err.message : String(err);
+      return {
+        ...base,
+        status: "needs_evidence" as const,
+        splits: [],
+        reason: `${p.reason} (Held for review: the split failed a check: ${why})`,
+        citations,
+        missingEvidence: "A reviewer's decision on how to split this cost.",
+        ...regulations,
+      };
+    }
   });
 
   return {
