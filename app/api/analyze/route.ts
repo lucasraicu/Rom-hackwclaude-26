@@ -3,6 +3,7 @@
 // FUNDPROOF_MOCK=cache returns the last known-good live run saved in data/cache (falls back to fixtures).
 import fs from "node:fs/promises";
 import path from "node:path";
+import Anthropic from "@anthropic-ai/sdk";
 import { NextResponse } from "next/server";
 import initial from "@/lib/fixtures/analysis.initial.json";
 import afterFix from "@/lib/fixtures/analysis.after-fix.json";
@@ -46,6 +47,20 @@ export async function POST(req: Request) {
     return NextResponse.json(result);
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: err instanceof Error ? err.message : String(err) }, { status: 500 });
+    const message = accountProblem(err) ?? (err instanceof Error ? err.message : String(err));
+    return NextResponse.json({ error: message }, { status: 500 });
   }
+}
+
+const FALLBACK = "Set FUNDPROOF_MOCK=1 (or =cache) in .env.local and restart to demo without Claude.";
+
+/** Bad key or an account with no credits: say so plainly instead of passing on the raw SDK error. */
+function accountProblem(err: unknown): string | null {
+  if (err instanceof Anthropic.AuthenticationError || err instanceof Anthropic.PermissionDeniedError) {
+    return `The Anthropic API rejected ANTHROPIC_API_KEY (${err.status}). Check the key. ${FALLBACK}`;
+  }
+  if (err instanceof Anthropic.BadRequestError && /credit balance|billing/i.test(err.message)) {
+    return `The Anthropic account has no API credits left. Add credits in the Console. ${FALLBACK}`;
+  }
+  return null;
 }
