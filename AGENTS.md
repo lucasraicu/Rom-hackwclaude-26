@@ -1,11 +1,12 @@
 # Repository instructions
 
-Before working in this repository, open and read `CLAUDE.md`, `TASKS.md` and
-`docs/PLAN.md`. Follow `CLAUDE.md` as the shared instructions for Claude Code,
+Before working in this repository, open and read `CLAUDE.md`, `TASKS.md`,
+`docs/PLAN.md` and `docs/MURMUR.md`. Follow `CLAUDE.md` as the shared instructions for Claude Code,
 Codex, Cursor and other coding assistants; do not rely on import syntax.
 
-Three people work on shared `main`, each in one lane (UI, AI, DATA) with its own
-files. GitHub Issues record lane ownership. Agents coordinate through Murmur.
+Three lane owners (UI, AI, DATA) and a lead work on shared `main`; each lane has its
+own files. GitHub Issues record lane ownership. Agents coordinate through Murmur
+using the protocol in `docs/MURMUR.md`.
 
 <!-- murmur:start -->
 ## Murmur

@@ -6,13 +6,13 @@ Live task ownership: [GitHub Issues](https://github.com/lucasraicu/Rom-hackwclau
 
 ## Team
 
-Three people, three laptops, one agent each, coordinating through Murmur.
-Each person claims one lane issue by assigning themselves on GitHub.
+Each person runs one agent in their own clone; agents coordinate through Murmur (`docs/MURMUR.md`).
+Each lane owner claims one lane issue by assigning themselves on GitHub.
 
+- Lead and plan reviewer: Harish (`thanycodes`). Runs the lead agent; edits no lane files.
 - Repo owner: Lucas (`lucasraicu`).
-- UI lane: claim the "UI lane" issue.
-- AI lane: claim the "AI lane" issue.
-- DATA lane: claim the "DATA lane" issue.
+- UI lane: issue #5. AI lane: issue #6. DATA lane: issue #7.
+- Push access today: `lucasraicu`, `andujp`, `thanycodes`. Anyone else needs a collaborator invite from Lucas before Murmur works for them.
 
 ## Decisions (agreed)
 
