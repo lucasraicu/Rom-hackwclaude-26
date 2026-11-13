@@ -37,11 +37,12 @@ If only three of us are building, Harish runs two T3 threads in the same clone: 
 ## Joining (each person, once, about 3 minutes)
 
 1. Accept the GitHub collaborator invite. Clone the repo and run `npm install`.
-2. Open the clone in T3 Code and start a Claude Code thread. The agent reads the Murmur section in `CLAUDE.md` and asks whether to join. Say yes.
-3. Load the tools: press **Stop** in the thread, then send any message (T3 restarts Claude with Murmur loaded).
-4. Name your device so teammates see who you are: `mur nickname <your-first-name>`.
-5. Paste your role's starter prompt below.
-6. Run `mur ui` and keep the page open. It shows every agent, its status and every message. Keep the URL it prints private: it carries a key.
+2. Install or upgrade Murmur to **v0.4.0 or later**. Older versions (0.2.x) have no tags, no `group:` chats and no `mur nickname`, so this protocol doesn't work on them. Run `curl -fsSL https://raw.githubusercontent.com/a-Fig/murmur/main/install.sh | sh`, then check that `mur version` prints `0.4.0` or later.
+3. Open the clone in T3 Code and start a Claude Code thread. The agent reads the Murmur section in `CLAUDE.md` and asks whether to join. Say yes. If you joined earlier on an older `mur`, run `mur stop && mur join` in the clone yourself.
+4. Load the tools: press **Stop** in the thread, then send any message (T3 restarts Claude with Murmur loaded). Do this in every thread that was open before you upgraded. Then check that the agent has a `tags` tool. If it only has `who`, `status`, `send`, `inbox` and `lookup`, it is still running the old version: start a new thread.
+5. Name your device so teammates see who you are: `mur nickname <your-first-name>`.
+6. Paste your role's starter prompt below.
+7. Run `mur ui` and keep the page open. It shows every agent, its status and every message. Keep the URL it prints private: it carries a key.
 
 ## Message types
 
