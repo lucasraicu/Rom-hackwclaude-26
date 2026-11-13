@@ -1,0 +1,11 @@
+txn_id,date,vendor,description,amount,account
+T-001,2026-10-03,Bayside Educational Books,Leveled readers for after-school tutoring sites,1240.00,Supplies
+T-002,2026-10-06,Literacy Lab Software,Phonics app licenses for federal literacy program classrooms (25 seats),875.00,Software
+T-003,2026-10-09,Brightpath Consulting LLC,Strategy services - October,3500.00,Contract Services
+T-004,2026-10-14,Luna Bistro,Staff appreciation dinner incl. wine,412.50,Meals
+T-005,2026-10-15,Costco,Student snacks for after-school tutoring sessions,286.30,Program Supplies
+T-006,2026-10-17,Office Depot,Printer toner and paper,186.40,Office
+T-007,2026-10-20,PG&E,Office electricity - October,342.18,Utilities
+T-008,2026-10-22,Harborview Event Hall,Venue deposit - spring fundraising gala,2000.00,Events
+T-009,2026-10-24,Bayside Educational Books,Workbooks for federal literacy program grades 2-3,640.00,Supplies
+T-010,2026-10-28,Zoom,Annual Zoom Pro subscription,149.90,Software

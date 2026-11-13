@@ -1,0 +1,27 @@
+[
+  {
+    "code": "GRANT-FED",
+    "name": "Federal Literacy Subaward",
+    "type": "federal",
+    "awardNumber": "FLS-2026-0412",
+    "periodStart": "2026-07-01",
+    "periodEnd": "2027-06-30",
+    "budgetRemaining": 48200,
+    "sourceDoc": "grant-fed-agreement.pdf"
+  },
+  {
+    "code": "GRANT-FDN",
+    "name": "Hartwell Family Foundation: After-School Tutoring",
+    "type": "foundation",
+    "awardNumber": "HFF-26-118",
+    "periodStart": "2026-09-01",
+    "periodEnd": "2027-08-31",
+    "budgetRemaining": 22500,
+    "sourceDoc": "grant-fdn-agreement.pdf"
+  },
+  {
+    "code": "UNRESTRICTED",
+    "name": "General Operating (Unrestricted)",
+    "type": "unrestricted"
+  }
+]

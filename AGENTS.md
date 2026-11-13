@@ -1,9 +1,8 @@
 # Repository instructions
 
-Before working in this repository, explicitly open and read `CLAUDE.md` and
-`TASKS.md`. Follow `CLAUDE.md` as the shared instructions for Claude Code,
-Cursor, Codex, and other coding assistants; do not rely on import syntax.
+Before working in this repository, open and read `CLAUDE.md`, `TASKS.md` and
+`docs/PLAN.md`. Follow `CLAUDE.md` as the shared instructions for Claude Code,
+Codex, Cursor and other coding assistants; do not rely on import syntax.
 
-Use GitHub Issues for live task ownership. Work in the same repository on
-shared `main`, with separate tasks and coordinated file ownership. Preserve other
-people's work and serialize Git write operations across sessions.
+Three people work on shared `main`, each in one lane (UI, AI, DATA) with its own
+files. GitHub Issues record lane ownership. Agents coordinate through Murmur.
