@@ -1,6 +1,8 @@
 // SHARED CONTRACT. Every lane builds against these types.
 // Changing this file affects all three lanes: announce the change on Murmur
 // (group:fundproof) before you edit it, and push it as its own small commit.
+import type { UploadedDocument, UploadSource } from "./data/uploadTypes";
+export type { UploadedDocument, UploadedDataset, UploadSource } from "./data/uploadTypes";
 
 /** Fund codes used everywhere: CSVs, Claude output, UI. */
 export type FundCode = "GRANT-FED" | "GRANT-FDN" | "UNRESTRICTED";
@@ -65,6 +67,10 @@ export interface Dataset {
   payroll: PayrollLine[];
   timesheets: TimesheetRow[];
   grantDocs: GrantDoc[];
+  /** Present only for uploaded bundles; never populated with demo documents. */
+  documents?: UploadedDocument[];
+  warnings?: string[];
+  recordSources?: Record<string, UploadSource[]>;
 }
 
 // ---------- Grant rules (AI lane extracts these from the grant PDFs) ----------
@@ -109,6 +115,7 @@ export interface Allocation {
   missingEvidence?: string;
   /** Regulation references, e.g. ["2 CFR 200.430(i)"]. */
   regulations?: string[];
+  sourceRefs?: UploadSource[];
 }
 
 export interface AnalysisSummary {
@@ -129,12 +136,16 @@ export interface AnalysisResult {
   rules: GrantRule[];
   allocations: Allocation[];
   summary: AnalysisSummary;
+  documents?: UploadedDocument[];
+  warnings?: string[];
 }
 
 // ---------- API ----------
 
 /** POST /api/analyze request body. */
 export interface AnalyzeRequest {
+  /** ID returned by multipart POST /api/dataset for an uploaded bundle. */
+  datasetId?: string;
   /** Text of an uploaded timesheets CSV that replaces data/inputs/timesheets.csv (the fix-loop moment). */
   timesheetsCsv?: string;
   /** Extra evidence the user uploaded as text, e.g. a signed scope of work (demo scenario 3). */
