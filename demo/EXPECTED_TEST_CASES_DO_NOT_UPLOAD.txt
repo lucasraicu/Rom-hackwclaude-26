@@ -1,0 +1,14 @@
+EXPECTED REVIEW CASES - FOR YOUR TEAM'S TESTING ONLY
+DO NOT UPLOAD THIS FILE INTO THE AI ANALYSIS INPUT.
+
+T001 $240 -> Potential Digital Skills allocation: notebooks for workshops; grant dates, category supported; proof reference present but underlying proof doc not in this kit.
+T002 $185 -> Potential Outreach allocation: printing for named outreach event; check underlying payment proof availability.
+T003 $2,400 -> Payroll split based on time records: $1,440 (24h) Digital Skills; $720 (12h) Outreach; $240 (4h) unresolved/not allocated to either grant. Do not invent a 50/50 split.
+T004 $95 -> Not eligible for Digital Skills grant (food excluded); possible unrestricted expense requires separate human approval, not automatic assignment.
+T005 $750 -> Needs review: equipment >$500 requires written prior approval for Digital Skills; none provided.
+T006 $160 -> Potential Outreach allocation: program transport; proof reference present; underlying proof not included.
+T007 $62 -> General office printer ink; not enough evidence to charge a restricted grant; may be reviewed against unrestricted funding.
+T008 $330 -> Outside Digital Skills award term (08/28 vs 09/01 start); do not charge to that grant.
+T009 $480 -> Purpose may match instructional category but payment evidence is missing; mark pending evidence.
+
+These are scenario-specific outcomes created from fictional rules, NOT real regulatory conclusions. A compliant production system would also check cumulative grant budget balances, reporting requirements, approvals and additional applicable rules.

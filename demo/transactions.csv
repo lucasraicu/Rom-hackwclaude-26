@@ -1,0 +1,10 @@
+﻿transaction_id,date,vendor,description,amount_usd,category,stated_purpose,evidence_doc_id,payment_proof_id,notes
+T001,2026-10-03,Notebook Warehouse,Workshop notebooks and pens,240.0,Supplies,Digital skills workshop on 2026-10-08,R-T001,P-T001,
+T002,2026-10-07,Local Print Studio,Flyers for neighborhood outreach event,185.0,Printing,Neighborhood outreach event on 2026-10-20,R-T002,P-T002,
+T003,2026-10-10,Harbor Bridge Payroll,October payroll: Jordan Lee,2400.0,Payroll,Employee worked across programs; see time records,PAY-T003,,
+T004,2026-10-12,Main Street Pizza,Pizza for volunteers,95.0,Food,Social meal after digital skills workshop,R-T004,,
+T005,2026-10-13,Computer Mart,Laptop for workshop,750.0,Equipment,Used at digital skills workshops; prior approval not included,R-T005,P-T005,
+T006,2026-10-19,City Transit Center,Transit cards for outreach participants,160.0,Transportation,Neighborhood outreach event on 2026-10-20,R-T006,P-T006,
+T007,2026-10-21,Office Supply Shop,General office printer ink,62.0,Office supplies,Used for various organizational activities,R-T007,,
+T008,2026-08-28,Bright AV Rentals,Projector rental for upcoming workshop,330.0,Equipment rental,Payment made before Digital Skills award term,R-T008,P-T008,
+T009,2026-10-24,Training Specialist LLC,Digital skills guest instructor,480.0,Contracted instruction,Instruction at digital skills workshop on 2026-10-24,INV-T009,,Payment evidence absent

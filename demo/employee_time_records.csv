@@ -1,0 +1,4 @@
+﻿transaction_id,employee,period_start,period_end,program,activity,hours,hourly_rate_usd,extended_amount_usd,evidence_status
+T003,Jordan Lee,2026-10-01,2026-10-10,Digital Skills,Digital skills lesson preparation and workshop delivery,24,60,1440,Verified activity log
+T003,Jordan Lee,2026-10-01,2026-10-10,Neighborhood Outreach,Outreach booth preparation and event coordination,12,60,720,Verified activity log
+T003,Jordan Lee,2026-10-01,2026-10-10,Unspecified,Unassigned / insufficient activity record,4,60,240,No documented program assignment

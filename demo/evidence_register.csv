@@ -1,0 +1,17 @@
+﻿evidence_doc_id,transaction_id,document_type,status,description
+R-T001,T001,itemized receipt,provided,Notebook receipt
+P-T001,T001,payment proof,provided,Fictional payment confirmation
+R-T002,T002,itemized receipt,provided,Printing receipt
+P-T002,T002,payment proof,provided,Fictional payment confirmation
+PAY-T003,T003,payroll record,provided,Payroll transaction; time details in employee_time_records.csv
+R-T004,T004,itemized receipt,provided,Pizza receipt
+R-T005,T005,itemized receipt,provided,Laptop receipt
+P-T005,T005,payment proof,provided,Fictional payment confirmation
+APP-T005,T005,written preapproval,missing,No written prior approval for laptop
+R-T006,T006,itemized receipt,provided,Transit cards receipt
+P-T006,T006,payment proof,provided,Fictional payment confirmation
+R-T007,T007,itemized receipt,provided,Office ink receipt
+R-T008,T008,itemized receipt,provided,Projector rental receipt
+P-T008,T008,payment proof,provided,Fictional payment confirmation
+INV-T009,T009,invoice,provided,Guest instructor invoice
+P-T009,T009,payment proof,missing,Payment proof missing
