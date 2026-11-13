@@ -55,6 +55,42 @@ reviews = st.session_state.reviews
 def table():
     return pd.DataFrame([{'ID':t['id'], 'Expense':t['expense'], 'Amount':t['amount'], 'Proposed funding':t['fund'], 'Recommendation':t['status'], 'Reviewer decision':reviews.get(t['id'],{}).get('decision','Not reviewed'), 'Explanation':t['explanation']} for t in rows])
 
+def dashboard_chart(frame, category, value, axis_title, currency=False):
+    """Explicit axes keep long fund names and count/currency units readable."""
+    number_format = '$,.0f' if currency else 'd'
+    st.vega_lite_chart(frame, {
+        'height': max(180, len(frame) * 64),
+        'background': '#20242c',
+        'mark': {'type': 'bar', 'color': '#bad0ff', 'cornerRadiusEnd': 4, 'size': 28},
+        'encoding': {
+            'y': {'field': category, 'type': 'nominal', 'sort': None,
+                  'axis': {'title': None, 'labelLimit': 300, 'labelPadding': 10}},
+            'x': {'field': value, 'type': 'quantitative',
+                  'scale': {'zero': True},
+                  'axis': {'title': axis_title, 'format': number_format,
+                           'tickMinStep': 1, 'tickCount': 4}},
+            'tooltip': [{'field': category, 'type': 'nominal'},
+                        {'field': value, 'type': 'quantitative', 'format': number_format}],
+        },
+        'config': {
+            'view': {'stroke': None},
+            'axis': {'labelColor': '#f5f5f7', 'titleColor': '#dbe5f5',
+                     'labelFontSize': 13, 'titleFontSize': 13, 'titlePadding': 14,
+                     'gridColor': '#414854', 'domainColor': '#667085', 'labelAngle': 0},
+        },
+    }, width='stretch', theme=None)
+
+
+def allocation_table(frame):
+    st.dataframe(frame, hide_index=True, width='stretch', column_config={
+        'ID': st.column_config.TextColumn('Expense ID', width='small'),
+        'Expense': st.column_config.TextColumn('Expense', width='large'),
+        'Amount': st.column_config.NumberColumn('Amount (USD)', format='$%.2f'),
+        'Proposed funding': st.column_config.TextColumn('Proposed funding', width='medium'),
+        'Explanation': st.column_config.TextColumn('Recommendation explanation', width='large'),
+    })
+
+
 def evidence(t):
     st.subheader(t['expense'])
     st.metric('Proposed amount', f"${t['amount']:,.2f}")
@@ -67,9 +103,12 @@ def evidence(t):
         st.markdown('#### Transaction evidence')
         st.write(t['evidence'] or 'No evidence supplied.')
         st.markdown('#### Source references')
+        st.caption('References supplied with this result; a reference alone is not verification.')
         for ref in t['references']: st.text(ref)
         if not t['references']: st.warning('No source references supplied. Evidence is unverified.')
-    if t['missing']: st.warning('Missing / unresolved: ' + '; '.join(t['missing']))
+    if t['missing']:
+        st.warning('Missing / unresolved: ' + '; '.join(t['missing']))
+        st.caption('Keep these items in your review notes, even if you approve for export.')
 
 if page == 'Overview':
     cols=st.columns(4)
@@ -81,26 +120,38 @@ if page == 'Overview':
             st.write('**'+f['name']+'**')
             st.metric('Sample award / fund budget',f"${f['budget']:,.0f}")
             st.caption(f['restriction'])
-    a,b=st.columns(2)
-    with a:
-        st.subheader('Proposed dollars by source')
-        if rows: st.bar_chart(table().groupby('Proposed funding')['Amount'].sum(),color='#a7c3ff')
-    with b:
-        st.subheader('Recommendation queue')
-        if rows: st.bar_chart(table()['Recommendation'].value_counts(),color='#c4acf0')
+    st.subheader('Proposed allocations by funding source')
+    st.caption('Total proposed dollars (USD). These are recommendations awaiting human review.')
+    if rows:
+        totals = table().groupby('Proposed funding', sort=False, as_index=False)['Amount'].sum()
+        dashboard_chart(totals, 'Proposed funding', 'Amount', 'Proposed amount (USD)', currency=True)
+    else:
+        st.info('Load sample results in Upload Documents to see funding totals.')
+    st.subheader('Expenses by recommendation')
+    st.caption('Number of expenses in each recommendation category; reviewer decisions are tracked separately.')
+    if rows:
+        counts = table()['Recommendation'].value_counts().reindex(
+            ['Supported', 'Needs Review', 'Unsupported'], fill_value=0
+        ).rename_axis('Recommendation').reset_index(name='Expenses')
+        dashboard_chart(counts, 'Recommendation', 'Expenses', 'Number of expenses')
+    else:
+        st.info('No recommendations loaded yet.')
     st.caption('Proposed amounts are not approved spending or remaining grant balances.')
 elif page == 'Upload Documents':
     if st.session_state.get('load_message'):
         st.success(st.session_state.load_message)
     st.write('Stage documents for analysis. Demo Mode loads the fixed sample and does not analyze uploads.')
+    st.caption('Add grants, financial records, and supporting documents below. Maximum 10 MB per file for analysis.')
     files=[]
-    for kind,label,types in [('grant','Grant agreements',['pdf','txt']),('expenses','Expense transactions',['csv']),('payroll','Payroll and employee time records',['csv']),('supporting','Supporting receipts / invoices',['pdf','png','jpg','jpeg']),('evidence_register','Evidence register',['csv'])]:
+    for kind,label,types in [('grant','Grant agreements',['pdf','txt']),('expenses','Expense transactions',['csv']),('payroll','Payroll and employee time records',['csv']),('supporting','Supporting receipts / invoices',['pdf','png','jpg','jpeg']),('evidence_register','Evidence register',['csv']),('other','Other',['pdf','txt','csv','png','jpg','jpeg'])]:
         selected=st.file_uploader(label,type=types,accept_multiple_files=True,key=kind)
+        if kind == 'other':
+            st.caption('Miscellaneous supporting documents, such as approval letters, policies, or activity records.')
         for f in selected:
             if is_excluded_document(f.name):
                 st.error(f'{f.name} is a test-only file and cannot be submitted for analysis.')
             else:
-                files.append((kind,f))
+                files.append(('supporting' if kind == 'other' else kind,f))
     if files: st.dataframe(pd.DataFrame([{'Name':f.name,'Type':kind,'Bytes':f.size,'Status':'Staged • not analyzed'} for kind,f in files]),hide_index=True)
     st.caption('Loading a new result replaces the current review session.')
     confirm=st.checkbox('Replace current reviews with the new analysis',value=False) if reviews else True
@@ -119,14 +170,15 @@ elif page == 'Upload Documents':
     if rows:
         st.subheader('Loaded allocation results')
         st.caption(st.session_state.origin + ' - open Allocation Review to inspect evidence and record decisions.')
-        st.dataframe(table(), hide_index=True, width='stretch')
+        allocation_table(table())
 elif page in ('Allocation Review','Evidence and Explanation','Review and Clarification'):
     st.info('Proposals are not approved allocations. Reviewer decisions are stored separately.')
     statuses=st.multiselect('Recommendation filter',['Supported','Needs Review','Unsupported'],default=['Supported','Needs Review','Unsupported'])
     filtered=[t for t in rows if t['status'] in statuses]
     if not filtered: st.info('No transactions match this filter.')
     else:
-        st.dataframe(table()[table()['ID'].isin([t['id'] for t in filtered])],hide_index=True,width='stretch',column_config={'Amount':st.column_config.NumberColumn(format='$%.2f')})
+        st.caption(f'{len(filtered)} of {len(rows)} expenses shown. Select a transaction below to inspect its evidence and save a review.')
+        allocation_table(table()[table()['ID'].isin([t['id'] for t in filtered])])
         selected=st.selectbox('Select transaction',[t['id'] for t in filtered],format_func=lambda i: next(t['expense'] for t in filtered if t['id']==i))
         t=next(t for t in filtered if t['id']==selected)
         left,right=st.columns([3,2])
@@ -137,7 +189,8 @@ elif page in ('Allocation Review','Evidence and Explanation','Review and Clarifi
             st.caption('Saved decision: '+previous.get('decision','Not reviewed'))
             with st.form('review_'+selected):
                 notes=st.text_area('Review notes / missing information',value=previous.get('notes',''))
-                decision=st.selectbox('Reviewer action',['Needs more information','Approve for export','Reject'])
+                actions=['Needs more information','Approve for export','Reject']
+                decision=st.selectbox('Reviewer action',actions,index=actions.index(previous.get('decision', actions[0])))
                 acknowledged=st.checkbox('I reviewed the evidence and unresolved issues')
                 if st.form_submit_button('Save review',type='primary'):
                     if not notes.strip(): st.error('Add review notes to explain your decision.')

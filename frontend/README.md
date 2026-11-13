@@ -60,3 +60,5 @@ Launch from `frontend/` so Streamlit loads `.streamlit/config.toml`. The dark th
 The workspace starts empty. In Upload Documents, click **Load sample results** with Demo Mode enabled. Six fixed mock allocations load without backend access, with a persistent success message and preview. Overview and Allocation Review read the same session data. Existing reviews require replacement confirmation. Uploaded files are not used to produce mock results.
 
 `EXPECTED_TEST_CASES_DO_NOT_UPLOAD.txt` is blocked by filename in both upload staging and the API client before content is read or transmitted. No demo directory is scanned or submitted automatically. The local checkout did not contain `demo/` at implementation time; existing frontend synthetic fixtures are used without inventing references to missing files. New upload kinds remain part of the proposed backend contract.
+
+The Other uploader accepts miscellaneous PDF, TXT, CSV, PNG and JPEG documents and submits them under the existing supporting category. Dashboard charts use explicit USD and expense-count axes.

@@ -19,7 +19,8 @@ from types import SimpleNamespace
 from api_client import analyze, is_excluded_document
 assert app.session_state['data']['transactions'] == []
 app.sidebar.radio[0].set_value('Upload Documents').run()
-assert len(app.get('file_uploader')) == 5
+assert len(app.get('file_uploader')) == 6
+assert app.get('file_uploader')[-1].label == 'Other'
 with patch('api_client.analyze', side_effect=AssertionError('Demo contacted backend')):
     app.button[0].click().run()
 assert not app.exception
@@ -51,6 +52,7 @@ app.selectbox[1].set_value('Approve for export')
 app.checkbox[0].check()
 app.button[0].click().run()
 assert app.session_state['reviews']['E-101']['decision'] == 'Approve for export'
+assert app.selectbox[1].value == 'Approve for export'
 app.sidebar.radio[0].set_value('Export').run()
 assert not app.exception
 assert len(app.dataframe[0].value) == 1
