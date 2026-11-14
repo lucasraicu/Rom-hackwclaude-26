@@ -20,7 +20,7 @@ from api_client import analyze, is_excluded_document
 assert app.session_state['data']['transactions'] == []
 app.sidebar.radio[0].set_value('Upload Documents').run()
 assert len(app.get('file_uploader')) == 6
-assert app.get('file_uploader')[-1].label == 'Other'
+assert app.get('file_uploader')[-1].label == 'Other Supporting Documents'
 with patch('api_client.analyze', side_effect=AssertionError('Demo contacted backend')):
     app.button[0].click().run()
 assert not app.exception
@@ -69,3 +69,30 @@ assert app.session_state['reviews'] == {}
 assert len(app.session_state['data']['transactions']) == 6
 assert app.success
 print('PASS: sample button, metrics, status cases, evidence, reload and answer-key exclusion')
+
+# Verify staging and backend exclusion through the UI with mocked upload selections.
+other_files = [SimpleNamespace(name='approval.docx', size=20),
+               SimpleNamespace(name='records.xlsx', size=30)]
+grant = SimpleNamespace(name='grant.pdf', size=40)
+app.sidebar.radio[0].set_value('Upload Documents').run()
+app.sidebar.toggle[0].set_value(False).run()
+for include_grant in (True, False):
+    def uploads(label, **kwargs):
+        if kwargs['key'] == 'other':
+            assert kwargs['accept_multiple_files'] is True
+            assert set(kwargs['type']) == {'pdf','txt','csv','docx','xlsx','png','jpg'}
+            return other_files
+        return [grant] if include_grant and kwargs['key'] == 'grant' else []
+    with patch('streamlit.file_uploader', side_effect=uploads), patch('api_client.analyze', return_value=sample_data()) as backend:
+        app.run()
+        staged = app.dataframe[0].value
+        assert set(staged['Name']) == ({'grant.pdf'} if include_grant else set()) | {'approval.docx', 'records.xlsx'}
+        assert all('not sent to backend' in status for status in staged[staged['Type'] == 'other']['Status'])
+        app.button[0].click().run()
+        assert not app.exception
+        if include_grant:
+            backend.assert_called_once_with([('grant', grant)])
+        else:
+            backend.assert_not_called()
+            assert any('staged only' in error.value for error in app.error)
+print('PASS: miscellaneous uploads staged, mixed uploads filtered, other-only analysis blocked')

@@ -143,24 +143,25 @@ elif page == 'Upload Documents':
     st.write('Stage documents for analysis. Demo Mode loads the fixed sample and does not analyze uploads.')
     st.caption('Add grants, financial records, and supporting documents below. Maximum 10 MB per file for analysis.')
     files=[]
-    for kind,label,types in [('grant','Grant agreements',['pdf','txt']),('expenses','Expense transactions',['csv']),('payroll','Payroll and employee time records',['csv']),('supporting','Supporting receipts / invoices',['pdf','png','jpg','jpeg']),('evidence_register','Evidence register',['csv']),('other','Other',['pdf','txt','csv','png','jpg','jpeg'])]:
+    for kind,label,types in [('grant','Grant agreements',['pdf','txt']),('expenses','Expense transactions',['csv']),('payroll','Payroll and employee time records',['csv']),('supporting','Supporting receipts / invoices',['pdf','png','jpg','jpeg']),('evidence_register','Evidence register',['csv']),('other','Other Supporting Documents',['pdf','txt','csv','docx','xlsx','png','jpg'])]:
         selected=st.file_uploader(label,type=types,accept_multiple_files=True,key=kind)
         if kind == 'other':
-            st.caption('Miscellaneous supporting documents, such as approval letters, policies, or activity records.')
+            st.caption('Miscellaneous documents are staged for reference only and will not be sent for analysis until backend support is available.')
         for f in selected:
             if is_excluded_document(f.name):
                 st.error(f'{f.name} is a test-only file and cannot be submitted for analysis.')
             else:
-                files.append(('supporting' if kind == 'other' else kind,f))
-    if files: st.dataframe(pd.DataFrame([{'Name':f.name,'Type':kind,'Bytes':f.size,'Status':'Staged • not analyzed'} for kind,f in files]),hide_index=True)
+                files.append((kind,f))
+    if files: st.dataframe(pd.DataFrame([{'Name':f.name,'Type':kind,'Bytes':f.size,'Status':'Staged only - not sent to backend' if kind == 'other' else 'Staged - not analyzed'} for kind,f in files]),hide_index=True)
+    analysis_files = [(kind, f) for kind, f in files if kind != 'other']
     st.caption('Loading a new result replaces the current review session.')
     confirm=st.checkbox('Replace current reviews with the new analysis',value=False) if reviews else True
     if st.button('Load sample results' if demo else 'Analyze documents',type='primary',disabled=not confirm):
         try:
-            if not demo and not files: raise ValueError('Upload at least one document first.')
-            if not demo and any(f.size>10*1024*1024 for _,f in files): raise ValueError('Each document must be at most 10 MB.')
+            if not demo and not analysis_files: raise ValueError('Upload at least one document in the first five categories for analysis. Other Supporting Documents are staged only.')
+            if not demo and any(f.size>10*1024*1024 for _,f in analysis_files): raise ValueError('Each document must be at most 10 MB.')
             with st.spinner('Loading sample fixtures…' if demo else 'Waiting for backend analysis…'):
-                result=sample_data() if demo else analyze(files)
+                result=sample_data() if demo else analyze(analysis_files)
             st.session_state.data=result
             st.session_state.reviews={}
             st.session_state.origin='Synthetic sample results' if demo else 'Backend analysis'

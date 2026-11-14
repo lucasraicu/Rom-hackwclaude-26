@@ -1,0 +1,40 @@
+.companion {
+  width: 100%;
+  background: #f5f4ee;
+}
+
+.companion iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f5f4ee;
+  border-bottom: 1px solid #d5ded3;
+}
+
+.navigation button {
+  min-height: 44px;
+  padding: 9px 16px;
+  border: 1px solid #d5ded3;
+  border-radius: 8px;
+  color: #152e28;
+  background: #fffef9;
+  font-size: 13px;
+}
+
+.navigation button[aria-pressed="true"] {
+  background: #152e28;
+  color: #fffef9;
+  border-color: #152e28;
+}
+
+.navigation button:hover {
+  border-color: #195d48;
+}

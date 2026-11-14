@@ -61,4 +61,4 @@ The workspace starts empty. In Upload Documents, click **Load sample results** w
 
 `EXPECTED_TEST_CASES_DO_NOT_UPLOAD.txt` is blocked by filename in both upload staging and the API client before content is read or transmitted. No demo directory is scanned or submitted automatically. The local checkout did not contain `demo/` at implementation time; existing frontend synthetic fixtures are used without inventing references to missing files. New upload kinds remain part of the proposed backend contract.
 
-The Other uploader accepts miscellaneous PDF, TXT, CSV, PNG and JPEG documents and submits them under the existing supporting category. Dashboard charts use explicit USD and expense-count axes.
+The sixth uploader, Other Supporting Documents, accepts multiple PDF, TXT, CSV, DOCX, XLSX, PNG and JPG files. Filenames appear in the staged documents list. These files remain staged only and are excluded from backend requests until backend support is available; analysis requires a document from one of the original five categories. Dashboard charts use explicit USD and expense-count axes.
